@@ -1,2 +1,4 @@
-package model;public class MockUserData {
+package model;
+
+public class MockUserData {
 }
