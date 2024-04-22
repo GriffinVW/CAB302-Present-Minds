@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import java.sql.Connection;
+
+
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
@@ -20,6 +23,7 @@ public class HelloApplication extends Application {
     // Ethan did not commit here
 
     public static void main(String[] args) {
+        Connection connection = DatabaseConnection.getInstance();
         launch();
     }
 }
