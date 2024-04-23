@@ -1,4 +1,4 @@
-package com.example.cab302.Model;
+package com.example.cab302;
 
 import java.sql.*;
 import java.util.Calendar;

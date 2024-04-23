@@ -1,14 +1,12 @@
-package com.example.cab302.Controller;
+package com.example.cab302;
 
-import com.example.cab302.Model.Event;
-import com.example.cab302.Model.IEventDAO;
-import com.example.cab302.Model.MockEventDAO;
-import com.example.cab302.Model.TblEvent;
+import com.example.cab302.IEventDAO;
+import com.example.cab302.MockEventDAO;
+import com.example.cab302.TblEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class HelloController {
     @FXML
