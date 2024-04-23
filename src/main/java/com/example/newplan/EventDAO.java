@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// This will be connected to Event class in calendersystem branch
 public class EventDAO {
     private Connection connection;
 
