@@ -1,8 +1,8 @@
-package com.example.cab302;
+package com.example.newplan.Controller;
 
-import com.example.cab302.IEventDAO;
-import com.example.cab302.MockEventDAO;
-import com.example.cab302.TblEvent;
+import com.example.newplan.Model.IEventDAO;
+import com.example.newplan.Model.MockEventDAO;
+import com.example.newplan.Model.TblEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 

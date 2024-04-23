@@ -1,4 +1,4 @@
-package com.example.cab302;
+package com.example.newplan;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

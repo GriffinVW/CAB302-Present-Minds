@@ -5,8 +5,8 @@ module com.example.cab302 {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
 
-    opens com.example.cab302 to javafx.fxml;
-    exports com.example.cab302;
-    exports com.example.cab302.Controller;
-    opens com.example.cab302.Controller to javafx.fxml;
+    opens com.example.newplan to javafx.fxml;
+    exports com.example.newplan;
+    exports com.example.newplan.Controller;
+    opens com.example.newplan.Controller to javafx.fxml;
 }

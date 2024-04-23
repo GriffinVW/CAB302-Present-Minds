@@ -1,19 +1,22 @@
-package com.example.cab302;
+package com.example.newplan.Model;
 
-import java.sql.*;
-import java.util.Calendar;
+import java.sql.Timestamp;
 
-public class Event {
+public class TblEvent {
+
     private int eventId;  //in the mock case eventId is actually the userID
+    private int userId;
     private String title;
     private String description;
 
-    private Calendar startTime;
-    private Calendar endTime;
+    private Timestamp startTime;
+    private Timestamp endTime;
     private boolean restrict;
 
-    public Event(int eventId, String title, String description, Calendar startTime, Calendar endTime, boolean restrict) {
+    public TblEvent(int eventId, int userId, String title, String description, Timestamp startTime, Timestamp endTime, boolean restrict) {
+
         this.eventId = eventId;
+        this.userId =userId;
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -25,5 +28,9 @@ public class Event {
     public int getId(){
         return eventId;
     }
+    public String getTitle(){
+        return title;
+    }
     // toString() method, etc.
+
 }

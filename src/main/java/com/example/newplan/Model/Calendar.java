@@ -1,4 +1,4 @@
-package com.example.cab302;
+package com.example.newplan.Model;
 
 public class Calendar {
     private Event[] Calendars;
