@@ -1,5 +1,6 @@
 package com.example.newplan;
 
+import com.example.newplan.model.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,3 +47,4 @@ public class UserDAO {
             System.err.println(ex);
         }
     }
+}
