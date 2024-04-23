@@ -1,13 +1,23 @@
-package model;
-
-public class UserData {
+package com.example.newplan.model;
+/**
+ * A simple com.example.newplan.model class representing user's data with a id, firstname, lastname, email, and password.
+ */
+public class User {
+    /**
+     * Constructs a new UserData with the specified id, first name, last name, email, and password.
+     * @param id The id of the user
+     * @param firstName The first name of the user
+     * @param lastName The last name of the user
+     * @param email The email of the user
+     * @param password The phone number of the user
+     */
     private int id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     
-    public UserData(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
