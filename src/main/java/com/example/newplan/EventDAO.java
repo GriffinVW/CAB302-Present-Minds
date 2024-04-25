@@ -11,6 +11,7 @@ public class EventDAO {
         connection = DatabaseConnection.getInstance();
     }
 
+    /*
     public void createTable() {
         // Todo Later: Create a Statement to run the CREATE TABLE query
     }
@@ -38,7 +39,7 @@ public class EventDAO {
         // Todo Later: Create a PreparedStatement to run the conditional SELECT query
         return null;
     }
-
+    */
     public void close() {
         try {
             connection.close();
@@ -46,3 +47,4 @@ public class EventDAO {
             System.err.println(ex);
         }
     }
+}

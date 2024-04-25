@@ -1,5 +1,6 @@
 package com.example.newplan;
 
+import com.example.newplan.model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.util.List;
 
 
 public class HelloApplication extends Application {
@@ -23,7 +25,10 @@ public class HelloApplication extends Application {
     // Ethan did not commit here
 
     public static void main(String[] args) {
-        Connection connection = DatabaseConnection.getInstance();
+        UserDAO userDAO = new UserDAO();
+        userDAO.createTable();
+
         launch();
+        userDAO.close();
     }
 }
