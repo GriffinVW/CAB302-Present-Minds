@@ -47,3 +47,4 @@ public class EventDAO {
             System.err.println(ex);
         }
     }
+}
