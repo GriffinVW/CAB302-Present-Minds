@@ -23,7 +23,7 @@ public class HelloApplication extends Application {
     }
     // Toms comment
     // Ethan did not commit here
-    // Griffins Commit for webhook testing
+    // Griffins second commit for webhook testing
 
     public static void main(String[] args) {
         UserDAO userDAO = new UserDAO();
