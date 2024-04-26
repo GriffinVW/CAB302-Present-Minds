@@ -10,7 +10,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Settings.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Screen_Time.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
 //        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         stage.setTitle("Present-Minds!");
