@@ -6,18 +6,30 @@ public class User {
     /**
      * Constructs a new UserData with the specified id, first name, last name, email, and password.
      * @param id The id of the user
+     * @param userName The id of the user
      * @param firstName The first name of the user
      * @param lastName The last name of the user
      * @param email The email of the user
      * @param password The phone number of the user
      */
     private int id;
+    private String userName;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    
-    public User(String firstName, String lastName, String email, String password) {
+
+    public User(int id, String userName, String firstName, String lastName, String email, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String userName, String firstName, String lastName, String email, String password) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -30,6 +42,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -61,4 +81,16 @@ public class User {
     }
 
     public void setPassword(String password) { this.password = password; }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password +
+                '}';
+    }
 }

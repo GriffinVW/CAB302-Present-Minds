@@ -4,18 +4,26 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class HelloController {
     @FXML
     private Label welcomeText;
-    private IEventDAO eventDAO;
+    private EventDAO eventDAO;
     public HelloController(){
-        eventDAO = new MockEventDAO();
+        eventDAO = new EventDAO();
+        eventDAO.createTable();
     }
 
     @FXML
     protected void onHelloButtonClick() {
-        ArrayList<TblEvent> events = eventDAO.getTblEventsForUser(1);
-        welcomeText.setText(events.get(0).getTitle());
+        //ArrayList<TblEvent> events = eventDAO.getEventsForUser(1);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2024, Calendar.JULY,3,16,30,0);
+        Event event = new Event("Play Time", "Working today",cal,cal,true,true);
+        eventDAO.insert(event,1);
+        List<Event> events1 = eventDAO.getAllUser(1);
+        welcomeText.setText(events1.get(0).getTitle());
     }
 }
