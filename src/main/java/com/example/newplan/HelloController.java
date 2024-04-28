@@ -26,10 +26,4 @@ public class HelloController {
         List<Event> events1 = eventDAO.getAllUser(1);
         welcomeText.setText(events1.get(0).getTitle());
     }
-
-    private void handleButtonClick() {
-        System.out.println("Button clicked!");
-        // Add your functionality here
-    }
-
 }
