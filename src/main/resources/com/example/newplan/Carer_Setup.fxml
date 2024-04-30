@@ -20,7 +20,7 @@
                     <children>
                         <ImageView fitHeight="68.0" fitWidth="61.0" layoutX="438.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Present_Minds.png" />
+                                <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
                   <Button defaultButton="true" layoutX="214.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Login" textFill="WHITE">

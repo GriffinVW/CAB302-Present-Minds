@@ -23,17 +23,20 @@ public class exampleContoller implements Controller {
     private Button information;
     @FXML
     private Button report;
+    @FXML
+    private Button example;
 
-    // Label the text fields and checkboxes : JUST ADD AN ID TO THE INPUT/CHECK BOX TO DO THIS
+    // Label the text fields and checkboxes : JUST ADD AN fx:id TO THE INPUT/CHECK BOX TO DO THIS
     @FXML
     private TextField first_name;
 
 
-    // JUST REMEMBER FOR EVERY TEXT FILED OR BUTTON YOU ADD MAKE SURE IN THE FXML IT HAS A fx:id YOU CAN SEE IN
-    // settings.fxml I added one for the firstname input and all the NAV buttons,
+    // JUST REMEMBER FOR EVERY TEXT FILED OR BUTTON YOU ADD MAKE SURE THE FXML HAS A fx:id YOU CAN SEE IN NAV
+    // ON index.fxml HOW fx:id SHOULD BE USED.
 
     // Also remember to change what controller FXML looks at :) it's in the FXML file in the first VBOX element
-    // I'm going to add more methods to the interface, also use the loadFXML() methods from the Controller interface
+    // I'm going to add more methods to the interface, also use the handleNavButtonClick to change pages
+    // JUST PARSE THE BUTTON THAT WAS PRESSED
 
     // You need to assign a function to each of the buttons here
     @Override
@@ -41,18 +44,21 @@ public class exampleContoller implements Controller {
         System.out.println("Initialization complete");
 
         // Add handlers for the buttons
+        // Remember to use the correct method such as handleButtonClick()
         settings.setOnAction(event -> handleNavButtonClick("Settings", settings));
         home.setOnAction(event -> handleNavButtonClick("Settings", home));
         reminders.setOnAction(event -> handleNavButtonClick("Reminders", reminders));
         restrictions.setOnAction(event -> handleNavButtonClick("Restrictions", restrictions));
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));
         report.setOnAction(event -> handleNavButtonClick("Screen_Time", report));
+        // EXAMPLE USE NOTICE I USE A DIFFERENT METHOD
+        example.setOnAction(event -> handleButtonClick("example"));
     }
 
 
     // This is a method to handle buttonClicks,
-
     // Add a "switch" or "if" statement for different functions
+    // YOU CAN ADJUST THIS AS NEEDED HENCE WHY I DID A OVERRIDE
     @Override
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);

@@ -22,7 +22,7 @@
                     <children>
                         <ImageView fitHeight="90.0" fitWidth="84.0" layoutX="5.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Present_Minds.png" />
+                                <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
                         <Button fx:id="home" defaultButton="true" layoutX="7.0" layoutY="87.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Home">

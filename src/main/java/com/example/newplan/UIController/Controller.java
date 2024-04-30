@@ -51,7 +51,7 @@ public interface Controller {
     }
 
 
-    // Loads a different FXML page, currently not working (working it as you read this)
+    // Loads a different FXML page
     default void loadFXML(String fxmlPath, Class<?> clazz, Stage currentStage) {
         try {
             FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlPath));

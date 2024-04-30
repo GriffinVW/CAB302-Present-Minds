@@ -18,7 +18,7 @@
                     <children>
                         <ImageView fitHeight="149.0" fitWidth="140.0" layoutX="68.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Present_Minds.png" />
+                                <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
                   <TextField promptText="Username" layoutX="43.0" layoutY="153.0" prefHeight="25.0" prefWidth="190.0" />
