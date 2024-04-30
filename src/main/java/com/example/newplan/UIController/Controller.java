@@ -40,6 +40,7 @@ public interface Controller {
             case "Reminders":
             case "Restrictions":
             case "ADHD_Information":
+            case "login":
             case "Screen_Time":
                 Stage stage = (Stage) refButton.getScene().getWindow();
                 loadFXML(buttonId + ".fxml", HelloApplication.class, stage);

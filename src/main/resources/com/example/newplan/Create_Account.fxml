@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.TextField?>
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.CreateAccountController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.accountController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
             <children>

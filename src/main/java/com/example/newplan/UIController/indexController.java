@@ -24,6 +24,8 @@ public class indexController implements Controller {
     private Button information;
     @FXML
     private Button report;
+    @FXML
+    private Button logout;
 
     // Label the text fields and checkboxes
 
@@ -41,6 +43,7 @@ public class indexController implements Controller {
         restrictions.setOnAction(event -> handleNavButtonClick("Restrictions", restrictions));
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));
         report.setOnAction(event -> handleNavButtonClick("Screen_Time", report));
+        logout.setOnAction(event -> handleNavButtonClick("login", logout));
     }
 
     @Override

@@ -2,13 +2,11 @@ package com.example.newplan.UIController;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
-public class CreateAccountController implements Controller {
+public class accountController implements Controller {
 
     // Label the buttons you need, below are the buttons for the nav, They shouldn't be included in the login or signup pages
 
