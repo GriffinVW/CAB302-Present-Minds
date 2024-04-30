@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.MyController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.informationController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
             <children>
@@ -21,37 +21,37 @@
                                 <Image url="@Present_Minds.png" />
                             </image>
                         </ImageView>
-                        <Button defaultButton="true" layoutX="7.0" layoutY="87.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Home">
+                        <Button fx:id="home" defaultButton="true" layoutX="7.0" layoutY="87.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Home">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="6.0" layoutY="128.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Reminders" textAlignment="CENTER">
+                        <Button fx:id="reminders" defaultButton="true" layoutX="6.0" layoutY="128.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Reminders" textAlignment="CENTER">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="6.0" layoutY="168.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Restrictions">
+                        <Button fx:id="restrictions" defaultButton="true" layoutX="6.0" layoutY="168.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Restrictions">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="6.0" layoutY="208.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Information" textFill="WHITE">
+                        <Button fx:id="information" defaultButton="true" layoutX="6.0" layoutY="208.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Information">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="6.0" layoutY="248.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Report">
+                        <Button fx:id="report" defaultButton="true" layoutX="6.0" layoutY="248.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Report">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="7.0" layoutY="290.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Settings">
+                        <Button fx:id="settings" defaultButton="true" layoutX="7.0" layoutY="290.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Settings">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button defaultButton="true" layoutX="6.0" layoutY="333.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Settings">
+                        <Button fx:id="logout" defaultButton="true" layoutX="6.0" layoutY="333.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 5px;" text="Log Out">
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
