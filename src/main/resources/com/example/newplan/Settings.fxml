@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.TextField?>
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.HelloController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.MyController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
             <children>
@@ -98,7 +98,7 @@
                   <Group layoutX="257.0" layoutY="162.0" />
                   <HBox layoutX="32.0" layoutY="34.0">
                      <children>
-                        <TextField promptText="First Name" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="first_name" promptText="First Name" prefHeight="25.0" prefWidth="190.0" />
                         <TextField promptText="Username" prefHeight="25.0" prefWidth="190.0">
                            <HBox.margin>
                               <Insets left="50.0" />
