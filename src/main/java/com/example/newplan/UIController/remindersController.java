@@ -33,7 +33,7 @@ public class remindersController implements Controller {
 
         // Add handlers for the buttons
         settings.setOnAction(event -> handleNavButtonClick("Settings", settings));
-        home.setOnAction(event -> handleNavButtonClick("Settings", home));
+        home.setOnAction(event -> handleNavButtonClick("index", home));
         reminders.setOnAction(event -> handleNavButtonClick("Reminders", reminders));
         restrictions.setOnAction(event -> handleNavButtonClick("Restrictions", restrictions));
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));

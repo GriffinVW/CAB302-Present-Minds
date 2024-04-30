@@ -3,6 +3,7 @@ package com.example.newplan.UIController;
 import com.example.newplan.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -28,7 +29,8 @@ public class exampleContoller implements Controller {
 
     // Label the text fields and checkboxes : JUST ADD AN fx:id TO THE INPUT/CHECK BOX TO DO THIS
     @FXML
-    private TextField first_name;
+    private TextField example_Field;
+    private CheckBox example_Box;
 
 
     // JUST REMEMBER FOR EVERY TEXT FILED OR BUTTON YOU ADD MAKE SURE THE FXML HAS A fx:id YOU CAN SEE IN NAV
@@ -63,7 +65,9 @@ public class exampleContoller implements Controller {
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
         // Here's an example of reading the first name textbook
-         System.out.println(readTextField(first_name));
+        System.out.println(readTextField(example_Field));
+        // Here's an example of reading the first name checkbox
+        System.out.println(isCheckBoxSelected(example_Box));
 
 
 

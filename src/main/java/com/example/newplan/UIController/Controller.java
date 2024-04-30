@@ -29,7 +29,6 @@ public interface Controller {
     }
 
     default void handleNavButtonClick(String buttonId, Button refButton) {
-        System.out.println("Button clicked: " + buttonId);
 
         // Ok weird thing but the way I'm getting the scene we are on is using the getScene method on a button,
         // so if the button isn't on that page (e.g login and signup) you will need to change the getScene()
@@ -46,6 +45,7 @@ public interface Controller {
                 loadFXML(buttonId + ".fxml", HelloApplication.class, stage);
                 break;
             default:
+                // Prevents errors
                 System.out.println("I don't have functionality for this button: " + buttonId);
         }
     }
