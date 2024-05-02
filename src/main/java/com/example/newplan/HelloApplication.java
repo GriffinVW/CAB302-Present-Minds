@@ -27,7 +27,8 @@ public class HelloApplication extends Application {
     // Griffins second commit for webhook testing
 
     public static void main(String[] args) {
-        System.out.println("Working Directory = " + System.getProperty("user.dir"));
+        // added this line quickly to see where the .db file was stored
+        System.out.println("Working directory = " + System.getProperty("user.dir"));
         UserDAO userDAO = new UserDAO();
         userDAO.createTable();
 

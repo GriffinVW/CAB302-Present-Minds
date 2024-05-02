@@ -47,6 +47,22 @@ public class UserDAO {
         }
     }
 
+    public boolean usernameExists(String username) {
+        try {
+            PreparedStatement checkUser = connection.prepareStatement(
+                    "SELECT COUNT(*) FROM userData WHERE userName = ?"
+            );
+            checkUser.setString(1, username);
+            ResultSet rs = checkUser.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;  // If count is greater than 0, username exists
+            }
+        } catch (SQLException ex) {
+            System.err.println("Database error: " + ex.getMessage());
+        }
+        return false;
+    }
+
     public void update(User user) {
         try {
             PreparedStatement updateAccount = connection.prepareStatement(

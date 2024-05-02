@@ -6,8 +6,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-
-// This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
+/**
+ * Primary controller for user creation in the application.
+ * Handles user input on create account page and stores it in the database.
+ */
 public class accountController implements Controller {
 
     private UserDAO userDAO = new UserDAO();
@@ -19,7 +21,7 @@ public class accountController implements Controller {
     @FXML
     private Button create_account_button;
 
-    // Label the text fields and checkboxes
+    // Page textfields
     @FXML
     private TextField create_account_first_name;
 
@@ -74,6 +76,11 @@ public class accountController implements Controller {
 
             if (!password.equals(reenterPassword)) {
                 System.out.println("Passwords do not match");
+                return;
+            }
+
+            if (userDAO.usernameExists(username)) {
+                System.out.println("Username is taken, please choose another.");
                 return;
             }
 
