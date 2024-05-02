@@ -14,11 +14,14 @@ public class loginController implements Controller {
 
     @FXML
     private Button signup;
+    @FXML
+    private Button login;
 
     // Label the text fields and checkboxes : JUST ADD AN fx:id TO THE INPUT/CHECK BOX TO DO THIS
     @FXML
-    private TextField example_Field;
-    private CheckBox example_Box;
+    private TextField login_username;
+    @FXML
+    private TextField login_password;
 
 
     // JUST REMEMBER FOR EVERY TEXT FILED OR BUTTON YOU ADD MAKE SURE THE FXML HAS A fx:id YOU CAN SEE IN NAV
@@ -40,6 +43,7 @@ public class loginController implements Controller {
         // BUTTON IS REDESIGNED!!!!! MOVE THE 'signup' BUTTON ID ON login.fxml TO THE NEW SIGNUP BUTTON WHEN READY
         // -Tom
         signup.setOnAction(event -> handleNavButtonClick("Create_Account", signup));
+        login.setOnAction(event -> handleButtonClick("login"));
     }
 
 
@@ -50,12 +54,8 @@ public class loginController implements Controller {
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
         // Here's an example of reading the first name textbook
-        System.out.println(readTextField(example_Field));
-        // Here's an example of reading the first name checkbox
-        System.out.println(isCheckBoxSelected(example_Box));
-
-
-
+        System.out.println(readTextField(login_username));
+        System.out.println(readTextField(login_password));
     }
 
 }

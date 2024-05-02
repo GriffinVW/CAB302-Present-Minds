@@ -21,8 +21,8 @@
                                 <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
-                  <TextField promptText="Username" layoutX="43.0" layoutY="153.0" prefHeight="25.0" prefWidth="190.0" />
-                  <TextField promptText="Password" layoutX="43.0" layoutY="192.0" prefHeight="25.0" prefWidth="190.0" />
+                  <TextField fx:id="login_username" promptText="Username" layoutX="43.0" layoutY="153.0" prefHeight="25.0" prefWidth="190.0" />
+                  <TextField fx:id="login_password" promptText="Password" layoutX="43.0" layoutY="192.0" prefHeight="25.0" prefWidth="190.0" />
                   <Button fx:id="login" defaultButton="true" layoutX="98.0" layoutY="243.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Login" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
