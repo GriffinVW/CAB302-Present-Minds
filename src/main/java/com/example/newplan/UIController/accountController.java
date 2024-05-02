@@ -56,6 +56,7 @@ public class accountController implements Controller {
 
         // Add handlers for the buttons
         create_account_button.setOnAction(event -> handleButtonClick("create_account_button"));
+        create_account_back_button.setOnAction(event -> handleNavButtonClick("login", create_account_back_button));
     }
 
     // This is a method to handle buttonClicks, I am trying to make the nav work and switch FXML pages
