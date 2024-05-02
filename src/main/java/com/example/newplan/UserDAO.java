@@ -1,8 +1,12 @@
 package com.example.newplan;
 
 import com.example.newplan.model.*;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class UserDAO {
@@ -30,6 +34,52 @@ public class UserDAO {
         }
     }
 
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hashBytes);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            // Handle exception appropriately (e.g., log error, return default value, etc.)
+        }
+        return null; // Return null if hashing fails
+    }
+
+    public String retrievePassword(String userName) {
+        try {
+            PreparedStatement getPassword = connection.prepareStatement(
+                    "SELECT password WHERE userName = ?"
+            );
+            getPassword.setString(1, userName);
+            ResultSet rs = getPassword.executeQuery();
+            return rs.getString("password");
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            return null;
+        }
+    }
+
+    public boolean authenticateUser(String userName, String password) {
+        // Retrieve the user's password hash from the database based on the username
+        String storedPasswordHash = retrievePassword(userName);
+        if (storedPasswordHash == null) {
+            // User not found in the database
+            return false;
+        }
+
+        // Hash the provided password using the same algorithm and salt used for hashing in the database
+        String providedPasswordHash = hashPassword(password);
+
+        // Compare the hashed passwords
+        if (providedPasswordHash != null) {
+            return providedPasswordHash.equals(storedPasswordHash);
+        }
+
+        return false;
+    }
+
     public void insert(User user) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
@@ -39,7 +89,7 @@ public class UserDAO {
             insertUser.setString(2, user.getFirstName());
             insertUser.setString(3, user.getLastName());
             insertUser.setString(4, user.getEmail());
-            insertUser.setString(5, user.getPassword());
+            insertUser.setString(5, hashPassword(user.getPassword()));
 
             insertUser.execute();
         } catch (SQLException ex) {
@@ -77,7 +127,7 @@ public class UserDAO {
             updateAccount.setString(2, user.getFirstName());
             updateAccount.setString(3, user.getLastName());
             updateAccount.setString(4, user.getEmail());
-            updateAccount.setString(5, user.getPassword());
+            updateAccount.setString(5, hashPassword(user.getPassword()));
             updateAccount.setInt(6, user.getId());
             updateAccount.execute();
         } catch (SQLException ex) {
