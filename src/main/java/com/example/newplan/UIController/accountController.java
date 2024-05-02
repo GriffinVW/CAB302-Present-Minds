@@ -11,17 +11,16 @@ import javafx.scene.control.TextField;
  * Handles user input on create account page and stores it in the database.
  */
 public class accountController implements Controller {
-
+    // Add a UserDAO instance to accountController
     private UserDAO userDAO = new UserDAO();
 
     // Label the buttons you need, below are the buttons for the nav, They shouldn't be included in the login or signup pages
-
     @FXML
     private Button create_account_back_button;
     @FXML
     private Button create_account_button;
 
-    // Page textfields
+    // Text-fields on signup page
     @FXML
     private TextField create_account_first_name;
 
@@ -40,31 +39,21 @@ public class accountController implements Controller {
     @FXML
     private TextField create_account_reenter_password;
 
-    // JUST REMEMBER FOR EVERY TEXT FILED OR BUTTON YOU ADD MAKE SURE IN THE FXML IT HAS A fx:id YOU CAN SEE IN
-    // settings.fxml I added one for the firstname input and all the NAV buttons,
-
-    // ALSO remember to change what controller FXML looks at :) it's in the FXML file
-    // I'm going to add more methods to the interface, also use the loadFXML() method but just comment it out
-    // and i'll fix it when i update that method.
-
-
-
-    // You need to assign a function to each of the buttons here
     @Override
     public void initialize() {
         System.out.println("Initialization complete");
 
-        // Add handlers for the buttons
+        // Handlers for when a button press is detected
         create_account_button.setOnAction(event -> handleButtonClick("create_account_button"));
         create_account_back_button.setOnAction(event -> handleNavButtonClick("login", create_account_back_button));
     }
 
-    // This is a method to handle buttonClicks, I am trying to make the nav work and switch FXML pages
-    // But I haven't got it working so that's the code in there.
-
-    // For signup pages just delete the current code in there.
-
-    // Add a "switch" or "if" statement for different functions
+    /**
+     * Handles user input into the database via UserDAO
+     * Verifies password is consistent and checks username uniqueness
+     * TODO: password hashing
+     * @param buttonId the id of the button that was clicked
+     */
     @Override
     public void handleButtonClick(String buttonId) {
         if ("create_account_button".equals(buttonId)) {

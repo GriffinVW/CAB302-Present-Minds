@@ -47,6 +47,11 @@ public class UserDAO {
         }
     }
 
+    /**
+     * Checks if a username a new user is trying to take already exists or not in the database
+     * @param username the username to check for in the database
+     * @return true if username exists, false otherwise
+     */
     public boolean usernameExists(String username) {
         try {
             PreparedStatement checkUser = connection.prepareStatement(
@@ -55,7 +60,7 @@ public class UserDAO {
             checkUser.setString(1, username);
             ResultSet rs = checkUser.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1) > 0;  // If count is greater than 0, username exists
+                return rs.getInt(1) > 0;  // If the count is greater than 0 then the username exists
             }
         } catch (SQLException ex) {
             System.err.println("Database error: " + ex.getMessage());
