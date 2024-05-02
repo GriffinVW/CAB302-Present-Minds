@@ -1,5 +1,7 @@
 package com.example.newplan.UIController;
 
+import com.example.newplan.UserDAO;
+import com.example.newplan.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -7,6 +9,8 @@ import javafx.scene.control.TextField;
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
 public class accountController implements Controller {
+
+    private UserDAO userDAO = new UserDAO();
 
     // Label the buttons you need, below are the buttons for the nav, They shouldn't be included in the login or signup pages
 
@@ -50,11 +54,6 @@ public class accountController implements Controller {
 
         // Add handlers for the buttons
         create_account_button.setOnAction(event -> handleButtonClick("create_account_button"));
-        // home.setOnAction(event -> handleButtonClick("index"));
-        // reminders.setOnAction(event -> handleButtonClick("Reminders"));
-        // restrictions.setOnAction(event -> handleButtonClick("Restrictions"));
-        // information.setOnAction(event -> handleButtonClick("ADHD_Information"));
-        // .setOnAction(event -> handleButtonClick("Screen_Time"));
     }
 
     // This is a method to handle buttonClicks, I am trying to make the nav work and switch FXML pages
@@ -65,19 +64,23 @@ public class accountController implements Controller {
     // Add a "switch" or "if" statement for different functions
     @Override
     public void handleButtonClick(String buttonId) {
-        System.out.println("Button clicked: " + buttonId);
-        // Here's an example of reading the first name textbook
-        System.out.println(readTextField(create_account_first_name));
-        System.out.println(readTextField(create_account_last_name));
-        System.out.println(readTextField(create_account_email));
-        System.out.println(readTextField(create_account_username));
-        System.out.println(readTextField(create_account_password));
-        System.out.println(readTextField(create_account_reenter_password));
+        if ("create_account_button".equals(buttonId)) {
+            String firstName = create_account_first_name.getText();
+            String lastName = create_account_last_name.getText();
+            String email = create_account_email.getText();
+            String username = create_account_username.getText();
+            String password = create_account_password.getText();
+            String reenterPassword = create_account_reenter_password.getText();
 
-        // Working on this RN for the nav, trying to make it switch pages
+            if (!password.equals(reenterPassword)) {
+                System.out.println("Passwords do not match");
+                return;
+            }
 
-        //        Stage stage = (Stage) settings.getScene().getWindow();
-        //        loadFXML("index.fxml", stage);
+            User newUser = new User(username, firstName, lastName, email, password);
+            userDAO.insert(newUser);
+            System.out.println("User created successfully!");
+        }
     }
 
 }
