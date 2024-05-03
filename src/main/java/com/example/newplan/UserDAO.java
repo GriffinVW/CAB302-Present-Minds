@@ -49,7 +49,7 @@ public class UserDAO {
     public String retrievePassword(String userName) {
         try {
             PreparedStatement getPassword = connection.prepareStatement(
-                    "SELECT password WHERE userName = ?"
+                    "SELECT password FROM userData WHERE userName = ?"
             );
             getPassword.setString(1, userName);
             ResultSet rs = getPassword.executeQuery();
