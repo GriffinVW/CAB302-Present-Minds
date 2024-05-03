@@ -11,10 +11,11 @@ import javafx.scene.control.TextField;
  * Handles user input on create account page and stores it in the database.
  */
 public class accountController implements Controller {
-    // Add a UserDAO instance to accountController
+
+    // Add a UserDAO instance to accountController for user insertion logic
     private UserDAO userDAO = new UserDAO();
 
-    // Label the buttons you need, below are the buttons for the nav, They shouldn't be included in the login or signup pages
+    // Page buttons
     @FXML
     private Button create_account_back_button;
     @FXML
@@ -50,12 +51,12 @@ public class accountController implements Controller {
 
     /**
      * Handles user input into the database via UserDAO
-     * Verifies password is consistent and checks username uniqueness
-     * TODO: password hashing
+     * Verifies password is consistent, checks username uniqueness and hashes passwords
      * @param buttonId the id of the button that was clicked
      */
     @Override
     public void handleButtonClick(String buttonId) {
+        // getting text-field input on button click
         if ("create_account_button".equals(buttonId)) {
             String firstName = create_account_first_name.getText();
             String lastName = create_account_last_name.getText();
@@ -64,16 +65,26 @@ public class accountController implements Controller {
             String password = create_account_password.getText();
             String reenterPassword = create_account_reenter_password.getText();
 
+            // verify password
             if (!password.equals(reenterPassword)) {
                 System.out.println("Passwords do not match");
                 return;
             }
 
+            // Username availability
             if (userDAO.usernameExists(username)) {
                 System.out.println("Username is taken, please choose another.");
                 return;
             }
 
+            // Password hashing
+            String hashedPassword = userDAO.hashPassword(password);
+            if (hashedPassword == null) {
+                System.out.println("Failed to hash password");
+                return;
+            }
+
+            // user insertion
             User newUser = new User(username, firstName, lastName, email, password);
             userDAO.insert(newUser);
             System.out.println("User created successfully!");
