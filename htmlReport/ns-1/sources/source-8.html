@@ -1,0 +1,303 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > UserDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan</a>
+</div>
+
+<h1>Coverage Summary for Class: UserDAO (com.example.newplan)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16.7%
+  </span>
+  <span class="absValue">
+    (2/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    3.1%
+  </span>
+  <span class="absValue">
+    (3/97)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.newplan;
+&nbsp;
+&nbsp;import com.example.newplan.model.*;
+&nbsp;
+&nbsp;import java.security.MessageDigest;
+&nbsp;import java.security.NoSuchAlgorithmException;
+&nbsp;import java.sql.*;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Base64;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class UserDAO {
+&nbsp;    private Connection connection;
+&nbsp;
+<b class="fc">&nbsp;    public UserDAO() {</b>
+<b class="fc">&nbsp;        connection = DatabaseConnection.getInstance();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void createTable() {
+&nbsp;        try {
+<b class="fc">&nbsp;            Statement createTable = connection.createStatement();</b>
+<b class="nc">&nbsp;            createTable.execute(</b>
+&nbsp;                    &quot;CREATE TABLE IF NOT EXISTS userData (&quot;
+&nbsp;                            + &quot;id INTEGER PRIMARY KEY AUTOINCREMENT, &quot;
+&nbsp;                            + &quot;userName VARCHAR NOT NULL, &quot;
+&nbsp;                            + &quot;firstName VARCHAR NOT NULL, &quot;
+&nbsp;                            + &quot;lastName VARCHAR NOT NULL, &quot;
+&nbsp;                            + &quot;email VARCHAR NOT NULL, &quot;
+&nbsp;                            + &quot;password VARCHAR NOT NULL &quot;
+&nbsp;                            + &quot;)&quot;
+&nbsp;            );
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String hashPassword(String password) {
+&nbsp;        try {
+<b class="nc">&nbsp;            MessageDigest md = MessageDigest.getInstance(&quot;SHA-256&quot;);</b>
+<b class="nc">&nbsp;            byte[] hashBytes = md.digest(password.getBytes());</b>
+<b class="nc">&nbsp;            return Base64.getEncoder().encodeToString(hashBytes);</b>
+<b class="nc">&nbsp;        } catch (NoSuchAlgorithmException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;            // Handle exception appropriately (e.g., log error, return default value, etc.)
+&nbsp;        }
+<b class="nc">&nbsp;        return null; // Return null if hashing fails</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String retrievePassword(String userName) {
+&nbsp;        try {
+<b class="nc">&nbsp;            PreparedStatement getPassword = connection.prepareStatement(</b>
+&nbsp;                    &quot;SELECT password FROM userData WHERE userName = ?&quot;
+&nbsp;            );
+<b class="nc">&nbsp;            getPassword.setString(1, userName);</b>
+<b class="nc">&nbsp;            ResultSet rs = getPassword.executeQuery();</b>
+<b class="nc">&nbsp;            return rs.getString(&quot;password&quot;);</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean authenticateUser(String userName, String password) {
+&nbsp;        // Retrieve the user&#39;s password hash from the database based on the username
+<b class="nc">&nbsp;        String storedPasswordHash = retrievePassword(userName);</b>
+<b class="nc">&nbsp;        if (storedPasswordHash == null) {</b>
+&nbsp;            // User not found in the database
+<b class="nc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // Hash the provided password using the same algorithm and salt used for hashing in the database
+<b class="nc">&nbsp;        String providedPasswordHash = hashPassword(password);</b>
+&nbsp;
+&nbsp;        // Compare the hashed passwords
+<b class="nc">&nbsp;        if (providedPasswordHash != null) {</b>
+<b class="nc">&nbsp;            return providedPasswordHash.equals(storedPasswordHash);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void insert(User user) {
+&nbsp;        try {
+<b class="nc">&nbsp;            PreparedStatement insertUser = connection.prepareStatement(</b>
+&nbsp;                    &quot;INSERT INTO userData (userName, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)&quot;
+&nbsp;            );
+<b class="nc">&nbsp;            insertUser.setString(1, user.getUserName());</b>
+<b class="nc">&nbsp;            insertUser.setString(2, user.getFirstName());</b>
+<b class="nc">&nbsp;            insertUser.setString(3, user.getLastName());</b>
+<b class="nc">&nbsp;            insertUser.setString(4, user.getEmail());</b>
+<b class="nc">&nbsp;            insertUser.setString(5, hashPassword(user.getPassword()));</b>
+&nbsp;
+<b class="nc">&nbsp;            insertUser.execute();</b>
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks if a username a new user is trying to take already exists or not in the database
+&nbsp;     * @param username the username to check for in the database
+&nbsp;     * @return true if username exists, false otherwise
+&nbsp;     */
+&nbsp;    public boolean usernameExists(String username) {
+&nbsp;        try {
+<b class="nc">&nbsp;            PreparedStatement checkUser = connection.prepareStatement(</b>
+&nbsp;                    &quot;SELECT COUNT(*) FROM userData WHERE userName = ?&quot;
+&nbsp;            );
+<b class="nc">&nbsp;            checkUser.setString(1, username);</b>
+<b class="nc">&nbsp;            ResultSet rs = checkUser.executeQuery();</b>
+<b class="nc">&nbsp;            if (rs.next()) {</b>
+<b class="nc">&nbsp;                return rs.getInt(1) &gt; 0;  // If the count is greater than 0 then the username exists</b>
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(&quot;Database error: &quot; + ex.getMessage());</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void update(User user) {
+&nbsp;        try {
+<b class="nc">&nbsp;            PreparedStatement updateAccount = connection.prepareStatement(</b>
+&nbsp;                    &quot;UPDATE userData SET userName = ?, firstName = ?, lastName = ?, email = ?, password = ? WHERE id = ?&quot;
+&nbsp;            );
+<b class="nc">&nbsp;            updateAccount.setString(1, user.getUserName());</b>
+<b class="nc">&nbsp;            updateAccount.setString(2, user.getFirstName());</b>
+<b class="nc">&nbsp;            updateAccount.setString(3, user.getLastName());</b>
+<b class="nc">&nbsp;            updateAccount.setString(4, user.getEmail());</b>
+<b class="nc">&nbsp;            updateAccount.setString(5, hashPassword(user.getPassword()));</b>
+<b class="nc">&nbsp;            updateAccount.setInt(6, user.getId());</b>
+<b class="nc">&nbsp;            updateAccount.execute();</b>
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void delete(int id) {
+&nbsp;        try {
+<b class="nc">&nbsp;            PreparedStatement deleteUser = connection.prepareStatement(&quot;DELETE FROM userData WHERE id = ?&quot;);</b>
+<b class="nc">&nbsp;            deleteUser.setInt(1, id);</b>
+<b class="nc">&nbsp;            deleteUser.execute();</b>
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;User&gt; getAll() {
+<b class="nc">&nbsp;        List&lt;User&gt; users = new ArrayList&lt;&gt;();</b>
+&nbsp;            try {
+<b class="nc">&nbsp;            Statement getAll = connection.createStatement();</b>
+<b class="nc">&nbsp;            ResultSet rs = getAll.executeQuery(&quot;SELECT * FROM userData&quot;);</b>
+<b class="nc">&nbsp;            while (rs.next()) {</b>
+<b class="nc">&nbsp;                users.add(</b>
+&nbsp;                        new User(
+<b class="nc">&nbsp;                                rs.getInt(&quot;id&quot;),</b>
+<b class="nc">&nbsp;                                rs.getString(&quot;userName&quot;),</b>
+<b class="nc">&nbsp;                                rs.getString(&quot;firstName&quot;),</b>
+<b class="nc">&nbsp;                                rs.getString(&quot;lastName&quot;),</b>
+<b class="nc">&nbsp;                                rs.getString(&quot;email&quot;),</b>
+<b class="nc">&nbsp;                                rs.getString(&quot;password&quot;)</b>
+&nbsp;                        )
+&nbsp;                );
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return users;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public User getById(int id) {
+&nbsp;        try {
+<b class="nc">&nbsp;            PreparedStatement getUser = connection.prepareStatement(&quot;SELECT * FROM userData WHERE id = ?&quot;);</b>
+<b class="nc">&nbsp;            getUser.setInt(1, id);</b>
+<b class="nc">&nbsp;            ResultSet rs = getUser.executeQuery();</b>
+<b class="nc">&nbsp;            if (rs.next()) {</b>
+<b class="nc">&nbsp;                return new User(</b>
+<b class="nc">&nbsp;                        rs.getInt(&quot;id&quot;),</b>
+<b class="nc">&nbsp;                        rs.getString(&quot;userName&quot;),</b>
+<b class="nc">&nbsp;                        rs.getString(&quot;firstName&quot;),</b>
+<b class="nc">&nbsp;                        rs.getString(&quot;lastName&quot;),</b>
+<b class="nc">&nbsp;                        rs.getString(&quot;email&quot;),</b>
+<b class="nc">&nbsp;                        rs.getString(&quot;password&quot;)</b>
+&nbsp;                );
+&nbsp;            }
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void close() {
+&nbsp;        try {
+<b class="nc">&nbsp;            connection.close();</b>
+<b class="nc">&nbsp;        } catch (SQLException ex) {</b>
+<b class="nc">&nbsp;            System.err.println(ex);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>
