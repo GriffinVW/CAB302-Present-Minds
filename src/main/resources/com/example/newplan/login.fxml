@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.TextField?>
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.loginController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
             <children>
@@ -18,17 +18,22 @@
                     <children>
                         <ImageView fitHeight="149.0" fitWidth="140.0" layoutX="68.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Present_Minds.png" />
+                                <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
-                  <TextField promptText="Username" layoutX="43.0" layoutY="153.0" prefHeight="25.0" prefWidth="190.0" />
-                  <TextField promptText="Password" layoutX="43.0" layoutY="192.0" prefHeight="25.0" prefWidth="190.0" />
-                  <Button defaultButton="true" layoutX="98.0" layoutY="243.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Login" textFill="WHITE">
+                  <TextField fx:id="login_username" promptText="Username" layoutX="43.0" layoutY="153.0" prefHeight="25.0" prefWidth="190.0" />
+                  <TextField fx:id="login_password" promptText="Password" layoutX="43.0" layoutY="192.0" prefHeight="25.0" prefWidth="190.0" />
+                  <Button fx:id="login" defaultButton="true" layoutX="98.0" layoutY="243.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Login" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Hyperlink layoutX="49.0" layoutY="294.0" text="Don't have an account? SIgn Up" />
+                  <Button fx:id="signup" defaultButton="true" layoutX="98.0" layoutY="290.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="temp" textFill="WHITE">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Hyperlink layoutX="49.0" layoutY="335.0" text="Don't have an account? SIgn Up" />
                     </children>
                 </Pane>
             </children>
