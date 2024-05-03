@@ -58,12 +58,18 @@ public class accountController implements Controller {
     public void handleButtonClick(String buttonId) {
         // getting text-field input on button click
         if ("create_account_button".equals(buttonId)) {
-            String firstName = create_account_first_name.getText();
-            String lastName = create_account_last_name.getText();
-            String email = create_account_email.getText();
-            String username = create_account_username.getText();
-            String password = create_account_password.getText();
-            String reenterPassword = create_account_reenter_password.getText();
+            String firstName = create_account_first_name.getText().trim();
+            String lastName = create_account_last_name.getText().trim();
+            String email = create_account_email.getText().trim();
+            String username = create_account_username.getText().trim();
+            String password = create_account_password.getText().trim();
+            String reenterPassword = create_account_reenter_password.getText().trim();
+
+            // prevent users from inserting empty fields into the DB
+            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || reenterPassword.isEmpty()) {
+                System.out.println("Please fill in all the fields");
+                return;
+            }
 
             // verify password
             if (!password.equals(reenterPassword)) {
