@@ -17,23 +17,21 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+    //private String password;
 
-    public User(int id, String userName, String firstName, String lastName, String email, String password) {
+    public User(int id, String userName, String firstName, String lastName, String email) {
         this.id = id;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
     }
 
-    public User(String userName, String firstName, String lastName, String email, String password) {
+    public User(String userName, String firstName, String lastName, String email) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
     }
 
     public int getId() {
@@ -76,12 +74,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) { this.password = password; }
-
     @Override
     public String toString() {
         return "User{" +
@@ -90,7 +82,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password +
                 '}';
     }
 }
