@@ -80,7 +80,7 @@ public class UserDAO {
         return false;
     }
 
-    public void insert(User user) {
+    public void insert(User user, String password) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
                     "INSERT INTO userData (userName, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)"
@@ -89,7 +89,7 @@ public class UserDAO {
             insertUser.setString(2, user.getFirstName());
             insertUser.setString(3, user.getLastName());
             insertUser.setString(4, user.getEmail());
-            insertUser.setString(5, hashPassword(user.getPassword()));
+            insertUser.setString(5, hashPassword(password));
 
             insertUser.execute();
         } catch (SQLException ex) {
@@ -121,13 +121,12 @@ public class UserDAO {
     public void update(User user) {
         try {
             PreparedStatement updateAccount = connection.prepareStatement(
-                    "UPDATE userData SET userName = ?, firstName = ?, lastName = ?, email = ?, password = ? WHERE id = ?"
+                    "UPDATE userData SET userName = ?, firstName = ?, lastName = ?, email = ? WHERE id = ?"
             );
             updateAccount.setString(1, user.getUserName());
             updateAccount.setString(2, user.getFirstName());
             updateAccount.setString(3, user.getLastName());
             updateAccount.setString(4, user.getEmail());
-            updateAccount.setString(5, hashPassword(user.getPassword()));
             updateAccount.setInt(6, user.getId());
             updateAccount.execute();
         } catch (SQLException ex) {
@@ -149,7 +148,7 @@ public class UserDAO {
         List<User> users = new ArrayList<>();
             try {
             Statement getAll = connection.createStatement();
-            ResultSet rs = getAll.executeQuery("SELECT * FROM userData");
+            ResultSet rs = getAll.executeQuery("SELECT id, userName, firstName, lastName, email FROM userData");
             while (rs.next()) {
                 users.add(
                         new User(
@@ -157,8 +156,7 @@ public class UserDAO {
                                 rs.getString("userName"),
                                 rs.getString("firstName"),
                                 rs.getString("lastName"),
-                                rs.getString("email"),
-                                rs.getString("password")
+                                rs.getString("email")
                         )
                 );
             }
@@ -170,7 +168,7 @@ public class UserDAO {
 
     public User getById(int id) {
         try {
-            PreparedStatement getUser = connection.prepareStatement("SELECT * FROM userData WHERE id = ?");
+            PreparedStatement getUser = connection.prepareStatement("SELECT id, userName, firstName, lastName, email FROM userData WHERE id = ?");
             getUser.setInt(1, id);
             ResultSet rs = getUser.executeQuery();
             if (rs.next()) {
@@ -179,8 +177,29 @@ public class UserDAO {
                         rs.getString("userName"),
                         rs.getString("firstName"),
                         rs.getString("lastName"),
-                        rs.getString("email"),
-                        rs.getString("password")
+                        rs.getString("email")
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return null;
+    }
+
+    public User getByUserName(String username) {
+        try {
+            PreparedStatement getUserByUserName = connection.prepareStatement(
+                    "SELECT id, userName, firstName, lastName, email FROM userData WHERE userName = ?"
+            );
+            getUserByUserName.setString(1, username);
+            ResultSet rs = getUserByUserName.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("userName"),
+                        rs.getString("firstName"),
+                        rs.getString("lastName"),
+                        rs.getString("email")
                 );
             }
         } catch (SQLException ex) {

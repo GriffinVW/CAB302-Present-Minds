@@ -1,7 +1,8 @@
 package com.example.newplan.UIController;
 
 import com.example.newplan.HelloApplication;
-import com.example.newplan.UserDAO;
+import com.example.newplan.*;
+import com.example.newplan.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,14 +55,21 @@ public class loginController implements Controller {
     private void handleLoginButtonClick() {
         String username = login_username.getText();
         String password = login_password.getText();
+        User loggedInUser = null;
 
         boolean isAuthenticated = userDAO.authenticateUser(username, password);
 
         if(isAuthenticated) {
             System.out.println("User Authenticated!");
             handleNavButtonClick("index", login);
+            loggedInUser = userDAO.getByUserName(username);
+            //sessionManager.setUserId(loggedInUser.getId());
         } else {
             System.out.println("User Authentication Failed");
+            login_username.setPromptText("Username/Password is Incorrect");
+            login_username.setStyle("-fx-prompt-text-fill: #ff6666");
+            login_password.setPromptText("Username/Password is Incorrect");
+            login_password.setStyle("-fx-prompt-text-fill: #ff6666");
         }
     }
 }
