@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > HelloController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan</a>
+</div>
+
+<h1>Coverage Summary for Class: HelloController (com.example.newplan)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HelloController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;//package com.example.newplan;
+&nbsp;//
+&nbsp;//import javafx.fxml.FXML;
+&nbsp;//import javafx.scene.control.Button;
+&nbsp;//import javafx.scene.control.Label;
+&nbsp;//
+&nbsp;//public class HelloController {
+&nbsp;//    @FXML
+&nbsp;//    private Button settings;
+&nbsp;//    @FXML
+&nbsp;//    private Button home;
+&nbsp;//    @FXML
+&nbsp;//    private Button reminders;
+&nbsp;//    @FXML
+&nbsp;//    private Button restrictions;
+&nbsp;//    @FXML
+&nbsp;//    private Button information;
+&nbsp;//    @FXML
+&nbsp;//    private Button report;
+&nbsp;//
+&nbsp;//
+&nbsp;////    Make Conterller interface
+&nbsp;//
+&nbsp;//    @FXML
+&nbsp;//    private void initialize() {
+&nbsp;//        System.out.println(&quot;Test&quot;);
+&nbsp;//        settings.setOnAction(event -&gt; handleButtonClick());
+&nbsp;//        home.setOnAction(event -&gt; handleButtonClick());
+&nbsp;//        reminders.setOnAction(event -&gt; handleButtonClick());
+&nbsp;//        restrictions.setOnAction(event -&gt; handleButtonClick());
+&nbsp;//        information.setOnAction(event -&gt; handleButtonClick());
+&nbsp;//        report.setOnAction(event -&gt; handleButtonClick());
+&nbsp;//    }
+&nbsp;//
+&nbsp;//    private void handleButtonClick() {
+&nbsp;//        System.out.println(&quot;Button clicked!&quot;);
+&nbsp;//        // Add your functionality here
+&nbsp;//    }
+&nbsp;//
+&nbsp;//}
+&nbsp;
+&nbsp;package com.example.newplan;
+&nbsp;
+&nbsp;import javafx.fxml.FXML;
+&nbsp;import javafx.scene.control.Label;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Calendar;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class HelloController {
+&nbsp;    @FXML
+&nbsp;    private Label welcomeText;
+&nbsp;    private EventDAO eventDAO;
+<b class="nc">&nbsp;    public HelloController(){</b>
+<b class="nc">&nbsp;        eventDAO = new EventDAO();</b>
+<b class="nc">&nbsp;        eventDAO.createTable();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    protected void onHelloButtonClick() {
+&nbsp;        //ArrayList&lt;TblEvent&gt; events = eventDAO.getEventsForUser(1);
+<b class="nc">&nbsp;        Calendar cal = Calendar.getInstance();</b>
+<b class="nc">&nbsp;        cal.set(2024, Calendar.JULY,3,16,30,0);</b>
+<b class="nc">&nbsp;        Event event = new Event(&quot;Play Time&quot;, &quot;Working today&quot;,cal,cal,true,true);</b>
+<b class="nc">&nbsp;        eventDAO.insert(event,1);</b>
+<b class="nc">&nbsp;        List&lt;Event&gt; events1 = eventDAO.getAllUser(1);</b>
+<b class="nc">&nbsp;        welcomeText.setText(events1.get(0).getTitle());</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>

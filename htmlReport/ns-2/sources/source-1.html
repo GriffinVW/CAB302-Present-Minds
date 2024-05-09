@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Controller</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan.UIController</a>
+</div>
+
+<h1>Coverage Summary for Class: Controller (com.example.newplan.UIController)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Controller</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.newplan.UIController;
+&nbsp;
+&nbsp;import com.example.newplan.HelloApplication;
+&nbsp;import javafx.fxml.FXMLLoader;
+&nbsp;import javafx.scene.Parent;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.CheckBox;
+&nbsp;import javafx.scene.control.TextField;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;
+&nbsp;// haven&#39;t made the controllers for SignUp/Login yet
+&nbsp;
+&nbsp;public interface Controller {
+&nbsp;    void initialize();
+&nbsp;
+&nbsp;    void handleButtonClick(String buttonId);
+&nbsp;
+&nbsp;    default String readTextField(TextField textField) {
+<b class="nc">&nbsp;        return textField.getText();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    default boolean isCheckBoxSelected(CheckBox checkBox) {
+<b class="nc">&nbsp;        return checkBox.isSelected();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default void handleNavButtonClick(String buttonId, Button refButton) {
+&nbsp;
+&nbsp;        // Ok weird thing but the way I&#39;m getting the scene we are on is using the getScene method on a button,
+&nbsp;        // so if the button isn&#39;t on that page (e.g login and signup) you will need to change the getScene()
+&nbsp;        // So its called on a different button
+&nbsp;
+<b class="nc">&nbsp;        switch (buttonId) {</b>
+&nbsp;            case &quot;Settings&quot;:
+&nbsp;            case &quot;index&quot;:
+&nbsp;            case &quot;Reminders&quot;:
+&nbsp;            case &quot;Restrictions&quot;:
+&nbsp;            case &quot;ADHD_Information&quot;:
+&nbsp;            case &quot;login&quot;:
+&nbsp;            case &quot;Create_Account&quot;:
+&nbsp;            case &quot;Screen_Time&quot;:
+<b class="nc">&nbsp;                Stage stage = (Stage) refButton.getScene().getWindow();</b>
+<b class="nc">&nbsp;                loadFXML(buttonId + &quot;.fxml&quot;, HelloApplication.class, stage);</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            default:
+&nbsp;                // Prevents errors
+<b class="nc">&nbsp;                System.out.println(&quot;I don&#39;t have functionality for this button: &quot; + buttonId);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    // Loads a different FXML page
+&nbsp;    default void loadFXML(String fxmlPath, Class&lt;?&gt; clazz, Stage currentStage) {
+&nbsp;        try {
+<b class="nc">&nbsp;            FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlPath));</b>
+<b class="nc">&nbsp;            Parent root = loader.load();</b>
+<b class="nc">&nbsp;            Scene scene = new Scene(root);</b>
+<b class="nc">&nbsp;            currentStage.setScene(scene);</b>
+<b class="nc">&nbsp;            currentStage.show();</b>
+<b class="nc">&nbsp;        } catch (IOException e) {</b>
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>

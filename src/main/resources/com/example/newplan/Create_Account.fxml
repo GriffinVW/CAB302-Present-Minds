@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.TextField?>
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.CreateAccountController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.accountController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
             <children>
@@ -19,7 +19,7 @@
                     <children>
                         <ImageView fitHeight="68.0" fitWidth="61.0" layoutX="438.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@Present_Minds.png" />
+                                <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
                         <TextField fx:id="create_account_first_name" promptText="First Name" layoutX="43.0" layoutY="105.0" prefHeight="25.0" prefWidth="190.0" />

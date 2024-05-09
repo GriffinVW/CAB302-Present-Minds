@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > remindersController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan.UIController</a>
+</div>
+
+<h1>Coverage Summary for Class: remindersController (com.example.newplan.UIController)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">remindersController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.newplan.UIController;
+&nbsp;
+&nbsp;import com.example.newplan.HelloApplication;
+&nbsp;import javafx.fxml.FXML;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;
+&nbsp;// This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
+<b class="nc">&nbsp;public class remindersController implements Controller {</b>
+&nbsp;
+&nbsp;    // Label the buttons you need, below are the buttons for the nav, They shouldn&#39;t be included in the login or signup pages
+&nbsp;
+&nbsp;    @FXML
+&nbsp;    private Button settings;
+&nbsp;    @FXML
+&nbsp;    private Button home;
+&nbsp;    @FXML
+&nbsp;    private Button reminders;
+&nbsp;    @FXML
+&nbsp;    private Button restrictions;
+&nbsp;    @FXML
+&nbsp;    private Button information;
+&nbsp;    @FXML
+&nbsp;    private Button report;
+&nbsp;    @FXML
+&nbsp;    private Button logout;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    // You need to assign a function to each of the buttons here
+&nbsp;    @Override
+&nbsp;    public void initialize() {
+<b class="nc">&nbsp;        System.out.println(&quot;Initialization complete&quot;);</b>
+&nbsp;
+&nbsp;        // Add handlers for the buttons
+<b class="nc">&nbsp;        settings.setOnAction(event -&gt; handleNavButtonClick(&quot;Settings&quot;, settings));</b>
+<b class="nc">&nbsp;        home.setOnAction(event -&gt; handleNavButtonClick(&quot;index&quot;, home));</b>
+<b class="nc">&nbsp;        reminders.setOnAction(event -&gt; handleNavButtonClick(&quot;Reminders&quot;, reminders));</b>
+<b class="nc">&nbsp;        restrictions.setOnAction(event -&gt; handleNavButtonClick(&quot;Restrictions&quot;, restrictions));</b>
+<b class="nc">&nbsp;        information.setOnAction(event -&gt; handleNavButtonClick(&quot;ADHD_Information&quot;, information));</b>
+<b class="nc">&nbsp;        report.setOnAction(event -&gt; handleNavButtonClick(&quot;Screen_Time&quot;, report));</b>
+<b class="nc">&nbsp;        logout.setOnAction(event -&gt; handleNavButtonClick(&quot;login&quot;, logout));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void handleButtonClick(String buttonId) {
+<b class="nc">&nbsp;        System.out.println(&quot;Button clicked: &quot; + buttonId);</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>

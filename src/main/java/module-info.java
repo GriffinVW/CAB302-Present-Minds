@@ -6,6 +6,10 @@ module com.example.newplan {
 
     opens com.example.newplan to javafx.fxml;
     exports com.example.newplan;
+
     exports com.example.newplan.UIController;
     opens com.example.newplan.UIController to javafx.fxml;
+
+    exports com.example.newplan.model;
+
 }

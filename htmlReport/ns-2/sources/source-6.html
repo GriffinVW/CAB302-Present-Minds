@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > loginController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan.UIController</a>
+</div>
+
+<h1>Coverage Summary for Class: loginController (com.example.newplan.UIController)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">loginController</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.newplan.UIController;
+&nbsp;
+&nbsp;import com.example.newplan.HelloApplication;
+&nbsp;import com.example.newplan.UserDAO;
+&nbsp;import javafx.fxml.FXML;
+&nbsp;import javafx.fxml.FXMLLoader;
+&nbsp;import javafx.scene.Parent;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.control.Button;
+&nbsp;import javafx.scene.control.TextField;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+<b class="nc">&nbsp;import java.io.IOException;</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Login page controller, handles frontend user inputs
+&nbsp; */
+&nbsp;public class loginController implements Controller {
+&nbsp;
+&nbsp;    // Page buttons
+&nbsp;    @FXML
+&nbsp;    private Button signup;
+&nbsp;    @FXML
+&nbsp;    private Button login;
+&nbsp;
+&nbsp;    // Page text-fields
+&nbsp;    @FXML
+&nbsp;    private TextField login_username;
+<b class="nc">&nbsp;    @FXML</b>
+&nbsp;    private TextField login_password;
+&nbsp;
+<b class="nc">&nbsp;    private UserDAO userDAO;</b>
+<b class="nc">&nbsp;</b>
+&nbsp;    @Override
+&nbsp;    public void initialize() {
+&nbsp;        System.out.println(&quot;Initialization complete&quot;);
+&nbsp;
+<b class="nc">&nbsp;        //Initialize UserDAO instance</b>
+&nbsp;        userDAO = new UserDAO();
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;        // Handlers for when a button press is detected</b>
+&nbsp;        signup.setOnAction(event -&gt; handleNavButtonClick(&quot;Create_Account&quot;, signup));
+&nbsp;        login.setOnAction(actionEvent -&gt; handleLoginButtonClick());
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void handleButtonClick(String buttonId) {
+&nbsp;        System.out.println(&quot;Button clicked: &quot; + buttonId);
+&nbsp;        // Here&#39;s an example of reading the first name textbook
+&nbsp;        System.out.println(readTextField(login_username));
+&nbsp;        System.out.println(readTextField(login_password));
+&nbsp;    }
+&nbsp;
+&nbsp;    private void handleLoginButtonClick() {
+&nbsp;        String username = login_username.getText();
+&nbsp;        String password = login_password.getText();
+&nbsp;
+&nbsp;        boolean isAuthenticated = userDAO.authenticateUser(username, password);
+&nbsp;
+&nbsp;        if(isAuthenticated) {
+&nbsp;            System.out.println(&quot;User Authenticated!&quot;);
+&nbsp;            handleNavButtonClick(&quot;index&quot;, login);
+&nbsp;        } else {
+&nbsp;            System.out.println(&quot;User Authentication Failed&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>
