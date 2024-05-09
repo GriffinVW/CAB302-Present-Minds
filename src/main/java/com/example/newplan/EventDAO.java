@@ -119,7 +119,7 @@ public class EventDAO {
         }
         return null;
     }
-    public List<Event> getAllUser(int userId) {
+    public  List<Event> getAllUser(int userId) {
         List<Event> events = new ArrayList<>();
         try {
             PreparedStatement getEventsUser = connection.prepareStatement("SELECT userId, title, description, startTime, endTime, restrict, reminder FROM event WHERE userId = ?");
@@ -154,7 +154,7 @@ public class EventDAO {
             Timestamp timestamp = new Timestamp(timeInMillis);
             // Convert the Timestamp object to a String
             String minDateStr= timestamp.toString();
-            long timeInMillis2 = minDate.getTimeInMillis();
+            long timeInMillis2 = maxDate.getTimeInMillis();
             // Create a Timestamp object using the time in milliseconds
             Timestamp timestamp2 = new Timestamp(timeInMillis2);
             // Convert the Timestamp object to a String
