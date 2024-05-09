@@ -4,6 +4,7 @@ import com.example.newplan.UserDAO;
 import com.example.newplan.model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
 /**
@@ -39,6 +40,10 @@ public class accountController implements Controller {
 
     @FXML
     private TextField create_account_reenter_password;
+
+    // Checkboxes on signup page
+    @FXML
+    private CheckBox carer_account_checkbox;
 
     @Override
     public void initialize() {
