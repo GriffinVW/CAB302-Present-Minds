@@ -38,10 +38,10 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField fx:id="child_first_name" layoutX="159.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
-                  <TextField fx:id="child_last_name" layoutX="158.0" layoutY="108.0" prefHeight="25.0" prefWidth="190.0" />
-                  <CheckBox fx:id="edit_restrictions" layoutX="190.0" layoutY="238.0" mnemonicParsing="false" text="Can edit restrictions" />
-                  <CheckBox fx:id="edit_reminders" layoutX="191.0" layoutY="204.0" mnemonicParsing="false" text="Can Edit Reminders" />
+                  <TextField fx:id="child_last_name" promptText="Child Last Name" layoutX="159.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
+                  <TextField fx:id="child_first_name" promptText="Child First Name" layoutX="158.0" layoutY="108.0" prefHeight="25.0" prefWidth="190.0" />
+                  <CheckBox fx:id="edit_restrictions" layoutX="190.0" layoutY="238.0" mnemonicParsing="false" text="Can make edits to restrictions" />
+                  <CheckBox fx:id="edit_reminders" layoutX="191.0" layoutY="204.0" mnemonicParsing="false" text="Can make edits to reminders" />
                     </children>
                 </Pane>
             </children>
