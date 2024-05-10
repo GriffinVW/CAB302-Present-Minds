@@ -181,6 +181,33 @@ public class EventDAO {
         }
         return events;
     }
+
+    public List<Event> getAllRestrictions(int userId) {
+        List<Event> events = new ArrayList<>();
+        try {
+            PreparedStatement EventsUserPeriod = connection.prepareStatement("SELECT userId, title, description, startTime, endTime, restrict, reminder FROM event WHERE userId = ? AND startTime < CURRENT_TIMESTAMP \n" +
+                    "AND CURRENT_TIMESTAMP < endTime;");
+
+            // Get the time in milliseconds from the Calendar object
+            ResultSet rs = EventsUserPeriod.executeQuery();
+            while (rs.next()) {
+                events.add(
+                        new Event(
+                                rs.getInt("userId"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getString("startTime"),
+                                rs.getString("endTime"),
+                                rs.getString("restrict"),
+                                rs.getString("reminder")
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return events;
+    }
     public void close() {
         try {
             connection.close();
