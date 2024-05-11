@@ -15,6 +15,7 @@ import java.util.List;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        SessionManager sessionManager = SessionManager.getInstance();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("index.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
 //        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
