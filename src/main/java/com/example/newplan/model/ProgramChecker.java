@@ -19,6 +19,8 @@ public class ProgramChecker implements Runnable{
     public ProgramChecker(EventDAO eventDAO, EventsManager eventsManager ){
         this.eventDAO = eventDAO;
         this.eventsManager = eventsManager;
+        this.restrictedPrograms = new ArrayList<>();
+        DefaultRestricedProccess();
     }
     public List<String> GetRestrictedPrograms(){
         return restrictedPrograms;
@@ -29,8 +31,7 @@ public class ProgramChecker implements Runnable{
         eventDAO = new EventDAO();
         eventsManager = new EventsManager(eventDAO);
         if (restrictionActive()){
-            setApps();
-            List<String> restrictedRunning = getRunningProcesses(restrictedPrograms);
+            List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
             List<String> list = new ArrayList<String>();
             list.add("");
             if (!restrictedRunning.equals(list)){
@@ -72,13 +73,21 @@ public class ProgramChecker implements Runnable{
         // Implement process checking logic here
         return null; // Placeholder return value
     }
-    public void setApps(){
-        restrictedPrograms = new ArrayList<>(); // Replace with your restricted program name
-        restrictedPrograms.add("NotePad");
-        restrictedPrograms.add("Minecraft");
-        restrictedPrograms.add("EXCEL.EXE");
+    public void DefaultRestricedProccess(){
+        AddRestriction("NotePad");
+        AddRestriction("Minecraft");
+        AddRestriction("EXCEL.EXE");
     }
-    public static List<String> getRunningProcesses(List<String> processNames) {
+    public void AddRestriction(String processName){
+        if (!restrictedPrograms.contains(processName)){
+            restrictedPrograms.add(processName);
+        }
+    }
+    public void RemoveRestriction(String processName){
+        restrictedPrograms.remove(processName);
+    }
+
+    public static List<String> getRunningRestrictedProcesses(List<String> processNames) {
         Set<String> uniqueProcesses = new HashSet<>();
         try {
             Process process = Runtime.getRuntime().exec("tasklist /fo csv /nh");
@@ -90,6 +99,25 @@ public class ProgramChecker implements Runnable{
                         uniqueProcesses.add(processName);
                         break;
                     }
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(uniqueProcesses);
+    }
+    public static List<String> getRunningProcesses() {
+        Set<String> uniqueProcesses = new HashSet<>();
+        try {
+            Process process = Runtime.getRuntime().exec("tasklist /fo csv /nh");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Parse each line to extract the process name and add it to the set
+                String[] parts = line.split(",");
+                if (parts.length > 0) {
+                    uniqueProcesses.add(parts[0].replace("\"", ""));
                 }
             }
             reader.close();

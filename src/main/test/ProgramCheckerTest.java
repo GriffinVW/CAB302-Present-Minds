@@ -1,14 +1,12 @@
-import com.example.newplan.Event;
 import com.example.newplan.EventDAO;
 import com.example.newplan.model.EventsManager;
 import com.example.newplan.model.ProgramChecker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Calendar;
 import java.util.List;
 
-import static com.example.newplan.model.ProgramChecker.getRunningProcesses;
+import static com.example.newplan.model.ProgramChecker.getRunningRestrictedProcesses;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProgramCheckerTest {
@@ -25,7 +23,7 @@ public class ProgramCheckerTest {
     public void testCompareRunning() {
         programChecker.setApps();
         List<String> processNames = List.of("EXCEL.EXE", "chrome.exe");
-        List<String> running = getRunningProcesses(processNames);
+        List<String> running = getRunningRestrictedProcesses(processNames);
         List<String> actual = List.of("chrome.exe");
         assertEquals(actual, running);
     }

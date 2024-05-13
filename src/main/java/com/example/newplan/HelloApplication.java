@@ -43,7 +43,7 @@ public class HelloApplication extends Application {
         EventDAO eventDAO = new EventDAO();
         EventsManager eventsManager = new EventsManager(eventDAO);
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, eventsManager), 15 ,15, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, eventsManager), 0 ,5, TimeUnit.MINUTES);
         launch();
         userDAO.close();
 //        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
