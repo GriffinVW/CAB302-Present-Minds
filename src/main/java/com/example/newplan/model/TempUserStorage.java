@@ -19,7 +19,7 @@ public class TempUserStorage {
         return instance;
     }
 
-    // retrieve temporary user data
+    // set temporary user data
     public void storeUser(User user) {
         this.temporaryUser = user;
     }
@@ -29,6 +29,7 @@ public class TempUserStorage {
         return this.temporaryUser;
     }
 
+    // temp user data deletion
     public void clearUser() {
         this.temporaryUser = null;
     }
@@ -43,6 +44,7 @@ public class TempUserStorage {
         return temporaryHashedPassword;
     }
 
+    // temp
     public void clearPassword() {
         this.temporaryHashedPassword = null;
     }

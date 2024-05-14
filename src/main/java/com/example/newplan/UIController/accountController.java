@@ -117,6 +117,7 @@ public class accountController implements Controller {
             } else {
                 // otherwise, proceed with normal user insertion
                 userDAO.insert(newUser, hashedPassword);
+                updateErrorText(errorLabel, "User created successfully!");
                 System.out.println("User created successfully!");
                 handleNavButtonClick("login", create_account_button);
             }
