@@ -98,6 +98,7 @@ public class accountController implements Controller {
             }
 
             // user insertion
+
             User newUser = new User(username, firstName, lastName, email, password);
             userDAO.insert(newUser);
             updateErrorText(errorLabel, "User created successfully!");

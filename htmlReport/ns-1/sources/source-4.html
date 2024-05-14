@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > HelloApplication</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan</a>
+</div>
+
+<h1>Coverage Summary for Class: HelloApplication (com.example.newplan)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HelloApplication</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.newplan;
+&nbsp;
+&nbsp;import com.example.newplan.model.User;
+&nbsp;import javafx.application.Application;
+&nbsp;import javafx.fxml.FXMLLoader;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;public class HelloApplication extends Application {</b>
+&nbsp;    @Override
+&nbsp;    public void start(Stage stage) throws IOException {
+<b class="nc">&nbsp;        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(&quot;index.fxml&quot;));</b>
+<b class="nc">&nbsp;        Scene scene = new Scene(fxmlLoader.load(), 640, 400);</b>
+&nbsp;//        scene.getStylesheets().add(getClass().getResource(&quot;styles.css&quot;).toExternalForm());
+<b class="nc">&nbsp;        stage.setTitle(&quot;Present-Minds!&quot;);</b>
+<b class="nc">&nbsp;        stage.setScene(scene);</b>
+<b class="nc">&nbsp;        stage.show();</b>
+&nbsp;    }
+&nbsp;    // Toms comment
+&nbsp;    // Ethan did not commit here
+&nbsp;    // Griffins second commit for webhook testing
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+&nbsp;        // added this line quickly to see where the .db file was stored
+<b class="nc">&nbsp;        System.out.println(&quot;Working directory = &quot; + System.getProperty(&quot;user.dir&quot;));</b>
+<b class="nc">&nbsp;        UserDAO userDAO = new UserDAO();</b>
+<b class="nc">&nbsp;        userDAO.createTable();</b>
+&nbsp;
+<b class="nc">&nbsp;        launch();</b>
+<b class="nc">&nbsp;        userDAO.close();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>

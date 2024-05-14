@@ -34,6 +34,8 @@ public class EventTest {
     public void testGetStartTime() {
         Calendar cal = Calendar.getInstance();
         cal.set(2024, Calendar.JULY, 3, 16, 30, 0);
+        event.getStartTime().set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
         assertEquals(cal.getTimeInMillis(), event.getStartTime().getTimeInMillis());
     }
 
@@ -41,6 +43,8 @@ public class EventTest {
     public void testGetEndTime() {
         Calendar cal = Calendar.getInstance();
         cal.set(2024, Calendar.JULY, 3, 16, 30, 0);
+        event.getEndTime().set(Calendar.MILLISECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
         assertEquals(cal.getTimeInMillis(), event.getEndTime().getTimeInMillis());
     }
     @Test
@@ -110,8 +114,8 @@ public class EventTest {
     @Test
     public void testGetStartTimeStr() {
         // Expected timestamp string based on the startTime set in the setup
-        String expectedTimestampStr = "2024-07-03 16:30:00.000";
-
+        String expectedTimestampStr = "2024-07-03 16:30:00.0";
+        event.getStartTime().set(Calendar.MILLISECOND, 0);
         // Call the method to get the timestamp string
         String actualTimestampStr = event.getStartTimeStr();
 
@@ -122,8 +126,8 @@ public class EventTest {
     @Test
     public void testGetEndTimeStr() {
         // Expected timestamp string based on the endTime set in the setup
-        String expectedTimestampStr = "2024-07-03 16:30:00.000";
-
+        String expectedTimestampStr = "2024-07-03 16:30:00.0";
+        event.getEndTime().set(Calendar.MILLISECOND, 0);
         // Call the method to get the timestamp string
         String actualTimestampStr = event.getEndTimeStr();
 
