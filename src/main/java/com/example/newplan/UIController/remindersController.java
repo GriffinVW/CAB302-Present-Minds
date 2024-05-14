@@ -2,13 +2,10 @@ package com.example.newplan.UIController;
 
 import com.example.newplan.Event;
 import com.example.newplan.EventDAO;
-import com.example.newplan.HelloApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -42,12 +39,19 @@ public class remindersController implements Controller {
     private Button confirm;
 
     @FXML
+    private TextField title;
+
+    @FXML
+    private TextArea description;
+
+    @FXML
     private TableView<Event> tableView;
 
     @FXML
     private TableColumn<Event, String> columnC1;
 
-
+    @FXML
+    private Label errorLabel;
 
     // You need to assign a function to each of the buttons here
     @Override
@@ -65,15 +69,30 @@ public class remindersController implements Controller {
         newele.setOnAction(event -> handleButtonClick("newele"));
         confirm.setOnAction(event -> handleButtonClick("confirm"));
 
+        getReminders();
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                System.out.println(getTitle(newSelection) + " title");
+                System.out.println(getDescription(newSelection) + " description");
+
+                title.setText(getTitle(newSelection));
+                description.setText(getDescription(newSelection));
+            }
+        });
     }
 
-    public void addMoreChildren() {
+    public void getReminders() {
         EventDAO eventDAO = new EventDAO();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal1.set(2024, Calendar.JANUARY, 1, 0, 0, 0);
         cal2.set(2024, Calendar.DECEMBER, 24, 0, 0, 0);
+
         List<Event> events = eventDAO.getAllUserPeriodReminders(1, cal1, cal2);
+        for (Event event : events) {
+            System.out.println(event.getDescription());
+        }
 
         ObservableList<Event> data = FXCollections.observableArrayList(events);
 
@@ -88,18 +107,41 @@ public class remindersController implements Controller {
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
         if (Objects.equals(buttonId, "newele")) {
-            addMoreChildren();
+            getReminders();
         } else {
+            if (readTextField(title).isEmpty() || readTextArea(description).isEmpty()) {
+                System.out.println("Please fill in all the fields");
+                updateErrorText(errorLabel, "Please fill in all the fields");
+                return;
+            }
+
             EventDAO eventDAO = new EventDAO();
             eventDAO.createTable();
 
+            System.out.println(readTextField(title));
 
             Calendar cal = Calendar.getInstance();
-            cal.set(2024, Calendar.JULY,3,16,30,0);
-            Event event = new Event("Hey", "Working today",cal,cal,false,true);
-            eventDAO.insert(event,1);
+            cal.set(2024, Calendar.JULY, 3, 16, 30, 0);
+            Event event = new Event(readTextField(title), readTextArea(description), cal, cal, false, true);
+            eventDAO.insert(event, 1);
         }
+    }
+
+    private void printSelectedRow(Event event) {
+        String title = "Title: " + event.getTitle();
+        String description = "Description: " + event.getDescription();
+
+        System.out.println(title);
+        System.out.println(description);
+
 
     }
 
+    private String getDescription(Event event) {
+        return event.getDescription();
+    }
+
+    private String getTitle(Event event) {
+        return event.getTitle();
+    }
 }
