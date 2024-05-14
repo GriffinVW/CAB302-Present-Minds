@@ -61,6 +61,19 @@ public class UserDAO {
         }
     }
 
+    public void setPassword(String userName, String password) {
+        try {
+            PreparedStatement setPassword = connection.prepareStatement(
+                    "UPDATE userData SET password = ? WHERE userName = ?"
+            );
+            setPassword.setString(1, hashPassword(password));
+            setPassword.setString(2, userName);
+            setPassword.execute();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+
     public boolean authenticateUser(String userName, String password) {
         // Retrieve the user's password hash from the database based on the username
         String storedPasswordHash = retrievePassword(userName);
@@ -127,7 +140,7 @@ public class UserDAO {
             updateAccount.setString(2, user.getFirstName());
             updateAccount.setString(3, user.getLastName());
             updateAccount.setString(4, user.getEmail());
-            updateAccount.setInt(6, user.getId());
+            updateAccount.setInt(5, user.getId());
             updateAccount.execute();
         } catch (SQLException ex) {
             System.err.println(ex);

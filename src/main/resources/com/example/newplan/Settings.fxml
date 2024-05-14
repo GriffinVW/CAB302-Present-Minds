@@ -82,12 +82,12 @@
                         </Text>
                   <ButtonBar layoutX="144.0" layoutY="276.0">
                      <buttons>
-                        <Button defaultButton="true" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Confirm" textFill="WHITE">
+                        <Button fx:id="confirm_button" defaultButton="true" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Confirm" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button defaultButton="true" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Cancel" textFill="WHITE">
+                        <Button fx:id="cancel_button" defaultButton="true" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Cancel" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -99,7 +99,7 @@
                   <HBox layoutX="32.0" layoutY="34.0">
                      <children>
                         <TextField fx:id="first_name" promptText="First Name" prefHeight="25.0" prefWidth="190.0" />
-                        <TextField promptText="Username" prefHeight="25.0" prefWidth="190.0">
+                        <TextField fx:id="user_name" promptText="Username" prefHeight="25.0" prefWidth="190.0">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
@@ -111,8 +111,8 @@
                   </HBox>
                   <HBox layoutX="31.0" layoutY="74.0">
                      <children>
-                        <TextField promptText="Last Name" prefHeight="25.0" prefWidth="190.0" />
-                        <TextField promptText="Change Password" prefHeight="25.0" prefWidth="190.0">
+                        <TextField fx:id="last_name" promptText="Last Name" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="change_password" promptText="Change Password" prefHeight="25.0" prefWidth="190.0">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
@@ -124,8 +124,8 @@
                   </HBox>
                   <HBox layoutX="30.0" layoutY="118.0">
                      <children>
-                        <TextField promptText="Email" prefHeight="25.0" prefWidth="190.0" />
-                        <TextField promptText="Re-Enter Password" prefHeight="25.0" prefWidth="190.0">
+                        <TextField fx:id="email" promptText="Email" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="re_enter_password" promptText="Re-Enter Password" prefHeight="25.0" prefWidth="190.0">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
