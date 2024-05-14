@@ -154,6 +154,15 @@ public class UserDAO {
         }
     }
 
+    public void clear() {
+        try {
+            PreparedStatement deleteUser = connection.prepareStatement("DROP TABLE userData");
+            deleteUser.execute();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
             try {

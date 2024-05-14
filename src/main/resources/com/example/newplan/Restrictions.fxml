@@ -4,6 +4,9 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +15,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.TextField?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.restrictionsController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
@@ -70,7 +74,7 @@
                         </Text>
                     </children>
                 </Pane>
-                <Pane layoutX="120.0" layoutY="71.0" prefHeight="323.0" prefWidth="505.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 15px;">
+                <Pane fx:id="event_con" layoutX="120.0" layoutY="71.0" prefHeight="323.0" prefWidth="505.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 15px;">
                     <children>
                         <Text layoutX="307.0" layoutY="26.0" stroke="BLACK" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Edit Restrictions">
                             <font>
@@ -79,11 +83,20 @@
                         </Text>
                         <Pane layoutX="8.0" layoutY="20.0" prefHeight="289.0" prefWidth="224.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-border-color: black; -fx-border-radius: 15px;">
                      <children>
-                        <Button defaultButton="true" layoutX="69.0" layoutY="236.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="New" textFill="WHITE">
+                        <Button fx:id="newele" defaultButton="true" layoutX="72.0" layoutY="242.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="New" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
+                         <TableView fx:id="tableView" prefHeight="243.0" prefWidth="224.0">
+                             <columns>
+                                 <TableColumn fx:id="columnC1" text="C1" prefWidth="220.0">
+                                     <cellValueFactory>
+                                         <PropertyValueFactory property="title"/>
+                                     </cellValueFactory>
+                                 </TableColumn>
+                             </columns>
+                         </TableView>
                      </children></Pane>
                   <Button defaultButton="true" layoutX="255.0" layoutY="272.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Cancel" textFill="WHITE">
                      <cursor>

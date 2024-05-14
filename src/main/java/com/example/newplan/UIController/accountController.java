@@ -6,6 +6,7 @@ import com.example.newplan.model.TempUserStorage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -41,6 +42,8 @@ public class accountController implements Controller {
 
     @FXML
     private TextField create_account_reenter_password;
+    @FXML
+    private Label errorLabel;
 
     // Checkboxes on signup page
     @FXML
@@ -74,17 +77,20 @@ public class accountController implements Controller {
             // prevent users from inserting empty fields into the DB
             if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || username.isEmpty() || password.isEmpty() || reenterPassword.isEmpty()) {
                 System.out.println("Please fill in all the fields");
+                updateErrorText(errorLabel, "Please fill in all the fields");
                 return;
             }
 
             // verify password
             if (!password.equals(reenterPassword)) {
+                updateErrorText(errorLabel, "Passwords do not match");
                 System.out.println("Passwords do not match");
                 return;
             }
 
             // Username availability
             if (userDAO.usernameExists(username)) {
+                updateErrorText(errorLabel, "Username is taken, please choose another.");
                 System.out.println("Username is taken, please choose another.");
                 return;
             }
@@ -92,9 +98,11 @@ public class accountController implements Controller {
             // Password hashing
             String hashedPassword = userDAO.hashPassword(password);
             if (hashedPassword == null) {
+                updateErrorText(errorLabel, "Failed to hash password");
                 System.out.println("Failed to hash password");
                 return;
             }
+
 
             // User insertion
             User newUser = new User(username, firstName, lastName, email);

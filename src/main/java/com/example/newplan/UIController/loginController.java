@@ -32,10 +32,12 @@ public class loginController implements Controller {
 
     private UserDAO userDAO;
 
+    SessionManager sessionManager = SessionManager.getInstance();
+
     @Override
     public void initialize() {
         System.out.println("Initialization complete");
-
+        sessionManager.setUserId(null);
         //Initialize UserDAO instance
         userDAO = new UserDAO();
 
@@ -63,7 +65,7 @@ public class loginController implements Controller {
             System.out.println("User Authenticated!");
             handleNavButtonClick("index", login);
             loggedInUser = userDAO.getByUserName(username);
-            //sessionManager.setUserId(loggedInUser.getId());
+            sessionManager.setUserId(loggedInUser.getId());
         } else {
             System.out.println("User Authentication Failed");
             login_username.setPromptText("Username/Password is Incorrect");
