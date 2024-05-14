@@ -18,6 +18,11 @@ public class User {
     private String lastName;
     private String email;
     //private String password;
+    private boolean isCarer;
+    private String childFirstName;
+    private String childLastName;
+    private boolean canEditReminders;
+    private boolean canEditRestrictions;
 
     public User(int id, String userName, String firstName, String lastName, String email) {
         this.id = id;
@@ -73,6 +78,26 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public boolean getIsCarer() {return isCarer;}
+
+    public void setIsCarer(boolean isCarer) {this.isCarer = isCarer;}
+
+    public String getChildFirstName() {return childFirstName;}
+
+    public void setChildFirstName(String childFirstName) {this.childFirstName = childFirstName;}
+
+    public String getChildLastName() {return childLastName;}
+
+    public void setChildLastName(String childLastName) {this.childLastName = childLastName;}
+
+    public boolean getCanEditReminders() {return canEditReminders;}
+
+    public void setCanEditReminders(boolean canEditReminders) {this.canEditReminders = canEditReminders;}
+
+    public boolean getCanEditRestrictions() {return canEditRestrictions;}
+
+    public void setCanEditRestrictions(boolean canEditRestrictions) {this.canEditRestrictions = canEditRestrictions;}
 
     @Override
     public String toString() {

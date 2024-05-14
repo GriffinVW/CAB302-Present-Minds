@@ -42,6 +42,7 @@ public interface Controller {
             case "Restrictions":
             case "ADHD_Information":
             case "login":
+            case "Carer_Setup":
             case "Create_Account":
             case "Screen_Time":
                 Stage stage = (Stage) refButton.getScene().getWindow();

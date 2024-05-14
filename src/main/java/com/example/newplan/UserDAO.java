@@ -26,7 +26,12 @@ public class UserDAO {
                             + "firstName VARCHAR NOT NULL, "
                             + "lastName VARCHAR NOT NULL, "
                             + "email VARCHAR NOT NULL, "
-                            + "password VARCHAR NOT NULL "
+                            + "password VARCHAR NOT NULL, "
+                            + "isCarer BOOLEAN DEFAULT FALSE, "
+                            + "childFirstName VARCHAR, "
+                            + "childLastName VARCHAR, "
+                            + "canEditReminders BOOLEAN DEFAULT FALSE, "
+                            + "canEditRestrictions BOOLEAN DEFAULT FALSE "
                             + ")"
             );
         } catch (SQLException ex) {
@@ -83,13 +88,18 @@ public class UserDAO {
     public void insert(User user, String password) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
-                    "INSERT INTO userData (userName, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO userData (userName, firstName, lastName, email, password, isCarer, childFirstName, childLastName, canEditReminders, canEditRestrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
             insertUser.setString(1, user.getUserName());
             insertUser.setString(2, user.getFirstName());
             insertUser.setString(3, user.getLastName());
             insertUser.setString(4, user.getEmail());
-            insertUser.setString(5, hashPassword(password));
+            insertUser.setString(5, password);
+            insertUser.setBoolean(6, user.getIsCarer());
+            insertUser.setString(7, user.getChildFirstName());
+            insertUser.setString(8, user.getChildLastName());
+            insertUser.setBoolean(9, user.getCanEditReminders());
+            insertUser.setBoolean(10, user.getCanEditRestrictions());
 
             insertUser.execute();
         } catch (SQLException ex) {

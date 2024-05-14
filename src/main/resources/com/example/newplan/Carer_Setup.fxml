@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.TextField?>
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.HelloController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.carerController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
             <children>
@@ -23,7 +23,7 @@
                                 <Image url="@images/Present_Minds.png" />
                             </image>
                         </ImageView>
-                  <Button defaultButton="true" layoutX="214.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Login" textFill="WHITE">
+                  <Button fx:id="carer_setup_login_button" defaultButton="true" layoutX="214.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Login" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -33,15 +33,15 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Button defaultButton="true" layoutX="9.0" layoutY="12.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="61.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Back" textFill="WHITE">
+                  <Button fx:id="carer_setup_back_button" defaultButton="true" layoutX="9.0" layoutY="12.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="61.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Back" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <TextField layoutX="159.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
-                  <TextField layoutX="158.0" layoutY="108.0" prefHeight="25.0" prefWidth="190.0" />
-                  <CheckBox layoutX="190.0" layoutY="238.0" mnemonicParsing="false" text="Can edit restrictions" />
-                  <CheckBox layoutX="191.0" layoutY="204.0" mnemonicParsing="false" text="Can Edit Reminders" />
+                  <TextField fx:id="child_last_name" promptText="Child Last Name" layoutX="159.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
+                  <TextField fx:id="child_first_name" promptText="Child First Name" layoutX="158.0" layoutY="108.0" prefHeight="25.0" prefWidth="190.0" />
+                  <CheckBox fx:id="edit_restrictions" layoutX="190.0" layoutY="238.0" mnemonicParsing="false" text="Can make edits to restrictions" />
+                  <CheckBox fx:id="edit_reminders" layoutX="191.0" layoutY="204.0" mnemonicParsing="false" text="Can make edits to reminders" />
                     </children>
                 </Pane>
             </children>
