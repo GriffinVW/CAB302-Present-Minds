@@ -1,0 +1,86 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > IEventDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.newplan</a>
+</div>
+
+<h1>Coverage Summary for Class: IEventDAO (com.example.newplan)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">IEventDAO</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.newplan;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;public interface IEventDAO {
+&nbsp;
+&nbsp;    public ArrayList&lt;Event&gt; getEventsForUser(int userId);
+&nbsp;    //will contain overloads to allow for querying specific time periods.
+&nbsp;
+&nbsp;    public void addEvent(Event event);
+&nbsp;    public void addTblEvent(TblEvent tblevent);
+&nbsp;
+&nbsp;    public void updateEvent(Event event);
+&nbsp;
+&nbsp;    public void deleteEvent(int eventId);
+&nbsp;    public ArrayList&lt;TblEvent&gt; getTblEventsForUser(int userId);
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-05-03 22:41</div>
+</div>
+</body>
+</html>
