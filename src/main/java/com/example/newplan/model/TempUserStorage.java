@@ -44,7 +44,7 @@ public class TempUserStorage {
         return temporaryHashedPassword;
     }
 
-    // temp
+    // clear temporarily stored password
     public void clearPassword() {
         this.temporaryHashedPassword = null;
     }
