@@ -21,11 +21,11 @@ public class EventTest {
         assertEquals(1, 1);
         //assertEquals(1, event.getEventId());
     }
-//    @Test
-//    public void testGetTitle() {
-//        assertEquals("Play Time", event.getTitle());
-//    }
-//
+    @Test
+    public void testGetTitle() {
+        assertEquals("Play Time", event.getTitle());
+    }
+
 //    @Test
 //    public void testGetDescription() {
 //        assertEquals("Working today", event.getDescription());
