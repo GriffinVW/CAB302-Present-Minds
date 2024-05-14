@@ -32,6 +32,7 @@ public class HelloApplication extends Application {
         UserDAO userDAO = new UserDAO();
         userDAO.createTable();
 
+
         launch();
         userDAO.close();
     }

@@ -181,6 +181,45 @@ public class EventDAO {
         }
         return events;
     }
+
+    public List<Event> getAllUserPeriodReminders(int userId, Calendar minDate, Calendar maxDate) {
+        List<Event> events = new ArrayList<>();
+        try {
+            PreparedStatement EventsUserPeriod = connection.prepareStatement("SELECT userId, title, description, startTime, endTime, restrict, reminder FROM event WHERE userId = ? AND startTime BETWEEN ? AND ? AND reminder = 1");
+
+            // Get the time in milliseconds from the Calendar object
+            long timeInMillis = minDate.getTimeInMillis();
+            // Create a Timestamp object using the time in milliseconds
+            Timestamp timestamp = new Timestamp(timeInMillis);
+            // Convert the Timestamp object to a String
+            String minDateStr= timestamp.toString();
+            long timeInMillis2 = maxDate.getTimeInMillis();
+            // Create a Timestamp object using the time in milliseconds
+            Timestamp timestamp2 = new Timestamp(timeInMillis2);
+            // Convert the Timestamp object to a String
+            String maxDateStr= timestamp2.toString();
+            EventsUserPeriod.setInt(1, userId);
+            EventsUserPeriod.setString(2, minDateStr);
+            EventsUserPeriod.setString(3, maxDateStr);
+            ResultSet rs = EventsUserPeriod.executeQuery();
+            while (rs.next()) {
+                events.add(
+                        new Event(
+                                rs.getInt("userId"),
+                                rs.getString("title"),
+                                rs.getString("description"),
+                                rs.getString("startTime"),
+                                rs.getString("endTime"),
+                                rs.getString("restrict"),
+                                rs.getString("reminder")
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return events;
+    }
     public void close() {
         try {
             connection.close();
