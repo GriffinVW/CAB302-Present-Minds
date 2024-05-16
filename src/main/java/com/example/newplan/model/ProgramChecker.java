@@ -1,5 +1,6 @@
 package com.example.newplan.model;
 
+import com.example.newplan.AppTrackerDAO;
 import com.example.newplan.Event;
 import com.example.newplan.EventDAO;
 
@@ -13,11 +14,14 @@ import java.util.Set;
 
 public class ProgramChecker implements Runnable{
     private EventDAO eventDAO;
+    private AppTrackerDAO appTrackerDAO;
     private EventsManager eventsManager;
     private List<String> restrictedPrograms;
+    private List<String> lastOpenedApps;
 
-    public ProgramChecker(EventDAO eventDAO, EventsManager eventsManager ){
+    public ProgramChecker(EventDAO eventDAO, AppTrackerDAO appTrackerDAO, EventsManager eventsManager ){
         this.eventDAO = eventDAO;
+        this.appTrackerDAO = appTrackerDAO;
         this.eventsManager = eventsManager;
         this.restrictedPrograms = new ArrayList<>();
         DefaultRestricedProccess();
@@ -30,6 +34,7 @@ public class ProgramChecker implements Runnable{
     public void run() {
         eventDAO = new EventDAO();
         eventsManager = new EventsManager(eventDAO);
+        updateAppTracker();
         if (restrictionActive()){
             List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
             List<String> list = new ArrayList<String>();
@@ -125,6 +130,21 @@ public class ProgramChecker implements Runnable{
             e.printStackTrace();
         }
         return new ArrayList<>(uniqueProcesses);
+    }
+
+    public void updateAppTracker() {
+        if (lastOpenedApps == null) {
+            lastOpenedApps = getRunningProcesses();
+        } else {
+            List<String> runningApps = getRunningProcesses();
+            for (String app: runningApps) {
+                if (lastOpenedApps.contains(app)) {
+                    appTrackerDAO.update(app);
+                }
+            }
+            // update last opened apps
+            lastOpenedApps = runningApps;
+        }
     }
 }
 
