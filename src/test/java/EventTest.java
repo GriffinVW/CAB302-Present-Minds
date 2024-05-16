@@ -18,8 +18,9 @@ public class EventTest {
 
     @Test
     public void testEventId() {
-        assertEquals(1, 1);
-        //assertEquals(1, event.getEventId());
+//        assertEquals(1, 1);
+        System.out.println("run x");
+        assertEquals(1, event.getEventId());
     }
     @Test
     public void testGetTitle() {
