@@ -177,7 +177,7 @@ public class remindersController implements Controller {
                 eventDAO.insert(event, 1);
 
                 System.out.println("day " + dayInt + " month " + monthInt + " year " + yearInt + " min " + minInt + " second " + secondInt + " hour " + hourInt);
-
+                getReminders();
             } catch (NumberFormatException ex) {
                 System.out.println("Invalid integer");
                 updateErrorText(errorLabel, "Invalid integer");
