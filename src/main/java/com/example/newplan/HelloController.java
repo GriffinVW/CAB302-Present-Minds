@@ -66,6 +66,9 @@ public class HelloController {
     protected void onHelloButtonClick() {
         //ArrayList<TblEvent> events = eventDAO.getEventsForUser(1);
         Calendar cal = Calendar.getInstance();
+
+        cal.set(2024, Calendar.JULY,3,16,30,0);
+        Event event = new Event("Play Time", "Working today",cal,cal,false,true);
         Calendar cal2 = Calendar.getInstance();
         cal.set(2024, Calendar.MAY,10,10,30,0);
         cal2.set(2024, Calendar.MAY,10,16,30,0);
