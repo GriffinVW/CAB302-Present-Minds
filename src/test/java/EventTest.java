@@ -13,17 +13,23 @@ public class EventTest {
         Calendar cal = Calendar.getInstance();
         cal.set(2024, Calendar.JULY, 3, 16, 30, 0);
         event = new Event(1, "Play Time", "Working today", cal, cal, true, true);
-
+        System.out.println("run x");
     }
 
     @Test
     public void testEventId() {
+//        assertEquals(1, 1);
+        System.out.println("run x");
         assertEquals(1, event.getEventId());
     }
     @Test
     public void testGetTitle() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2024, Calendar.JULY, 3, 16, 30, 0);
+        event = new Event(1, "Play Time", "Working today", cal, cal, true, true);
         assertEquals("Play Time", event.getTitle());
     }
+
 
     @Test
     public void testGetDescription() {

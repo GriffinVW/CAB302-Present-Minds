@@ -182,6 +182,7 @@ public class EventDAO {
         return events;
     }
 
+
     public List<Event> getAllUserPeriodReminders(int userId, Calendar minDate, Calendar maxDate) {
         List<Event> events = new ArrayList<>();
         try {
@@ -201,6 +202,15 @@ public class EventDAO {
             EventsUserPeriod.setInt(1, userId);
             EventsUserPeriod.setString(2, minDateStr);
             EventsUserPeriod.setString(3, maxDateStr);
+
+    public List<Event> getAllRestrictions(int userId) {
+        List<Event> events = new ArrayList<>();
+        try {
+            PreparedStatement EventsUserPeriod = connection.prepareStatement("SELECT userId, title, description, startTime, endTime, restrict, reminder FROM event WHERE userId = ? AND startTime < CURRENT_TIMESTAMP \n" +
+                    "AND CURRENT_TIMESTAMP < endTime;");
+
+            // Get the time in milliseconds from the Calendar object
+
             ResultSet rs = EventsUserPeriod.executeQuery();
             while (rs.next()) {
                 events.add(
@@ -221,7 +231,7 @@ public class EventDAO {
         return events;
     }
 
-    public List<Event> getAllUserPeriodRestrictons(int userId, Calendar minDate, Calendar maxDate) {
+    public List<Event> getAllUserPeriodRestrictons2(int userId, Calendar minDate, Calendar maxDate) {
         List<Event> events = new ArrayList<>();
         try {
             PreparedStatement EventsUserPeriod = connection.prepareStatement("SELECT userId, title, description, startTime, endTime, restrict, reminder FROM event WHERE userId = ? AND startTime BETWEEN ? AND ? AND restrict = 1");
