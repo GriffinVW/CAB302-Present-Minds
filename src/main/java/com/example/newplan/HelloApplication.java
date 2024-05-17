@@ -1,7 +1,6 @@
 package com.example.newplan;
 
-import com.example.newplan.model.EventsManager;
-import com.example.newplan.model.User;
+import com.example.newplan.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -43,8 +42,10 @@ public class HelloApplication extends Application {
         Test();
         EventDAO eventDAO = new EventDAO();
         EventsManager eventsManager = new EventsManager(eventDAO);
+        AppTrackerDAO appTrackerDAO = new AppTrackerDAO();
+        appTrackerDAO.createTable();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, eventsManager), 0 ,5, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,5, TimeUnit.MINUTES);
         launch();
         userDAO.close();
 //        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
