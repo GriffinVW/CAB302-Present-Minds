@@ -49,8 +49,6 @@
                         <CheckBox fx:id="carer_account_checkbox" layoutX="183.0" layoutY="236.0" mnemonicParsing="false" text="Parent / Carer Account" />
                         <Label fx:id="errorLabel" contentDisplay="CENTER" layoutX="185.0" layoutY="257.0" prefHeight="17.0" prefWidth="172.0" text=" " textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" />
 
-                        <CheckBox layoutX="183.0" layoutY="236.0" mnemonicParsing="false" text="Parent / Carer Account" />
-
                     </children>
                 </Pane>
             </children>
