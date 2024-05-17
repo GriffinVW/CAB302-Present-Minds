@@ -1,9 +1,12 @@
 package com.example.newplan.UIController;
 
-import com.example.newplan.HelloApplication;
+import com.example.newplan.model.Event;
+import com.example.newplan.model.EventDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.time.Year;
@@ -134,6 +137,7 @@ public class remindersController implements Controller {
     @Override
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
+        EventDAO eventDAO = new EventDAO();
 
         if (Objects.equals(buttonId, "newele")) {
             getReminders();
@@ -185,7 +189,6 @@ public class remindersController implements Controller {
         } else if (Objects.equals(buttonId, "delete")) {
             if (id != 0) {
                 System.out.println(id + "removed");
-                EventDAO eventDAO = new EventDAO();
                 eventDAO.delete(id);
             } else {
                 System.out.println("Please Select Event");
@@ -211,6 +214,6 @@ public class remindersController implements Controller {
         return event.getEventId();
     }
 
-  }
-
 }
+
+

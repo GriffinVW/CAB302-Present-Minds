@@ -1,6 +1,6 @@
 package com.example.newplan.UIController;
 
-import com.example.newplan.UserDAO;
+import com.example.newplan.model.UserDAO;
 import com.example.newplan.model.User;
 import com.example.newplan.model.TempUserStorage;
 import javafx.fxml.FXML;

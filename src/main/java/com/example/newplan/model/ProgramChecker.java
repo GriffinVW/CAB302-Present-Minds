@@ -1,9 +1,5 @@
 package com.example.newplan.model;
 
-import com.example.newplan.AppTrackerDAO;
-import com.example.newplan.Event;
-import com.example.newplan.EventDAO;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

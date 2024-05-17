@@ -1,11 +1,8 @@
-import com.example.newplan.UserDAO;
+import com.example.newplan.model.UserDAO;
 import com.example.newplan.model.User;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package com.example.newplan;
+package com.example.newplan.model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

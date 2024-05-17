@@ -1,13 +1,8 @@
-package com.example.newplan;
+package com.example.newplan.model;
 
 import com.example.newplan.model.*;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
 
 public class AppTrackerDAO {
     private Connection connection;

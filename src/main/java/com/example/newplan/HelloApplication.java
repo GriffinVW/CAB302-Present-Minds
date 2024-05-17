@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import com.example.newplan.model.ProgramChecker;
 import java.io.IOException;
 
-import java.sql.Connection;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;

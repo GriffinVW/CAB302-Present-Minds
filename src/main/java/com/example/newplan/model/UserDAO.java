@@ -1,6 +1,4 @@
-package com.example.newplan;
-
-import com.example.newplan.model.*;
+package com.example.newplan.model;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

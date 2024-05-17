@@ -42,11 +42,12 @@
 
 package com.example.newplan;
 
+import com.example.newplan.model.Event;
+import com.example.newplan.model.EventDAO;
 import com.example.newplan.model.EventsManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 

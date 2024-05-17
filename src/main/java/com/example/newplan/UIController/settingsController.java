@@ -1,16 +1,11 @@
 package com.example.newplan.UIController;
 
-import com.example.newplan.HelloApplication;
-import com.example.newplan.*;
+import com.example.newplan.model.SessionManager;
 import com.example.newplan.model.User;
-import com.example.newplan.model.UserRegoHandler;
+import com.example.newplan.model.UserDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class

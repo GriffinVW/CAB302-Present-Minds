@@ -11,5 +11,6 @@ module com.example.newplan {
     opens com.example.newplan.UIController to javafx.fxml;
 
     exports com.example.newplan.model;
+    opens com.example.newplan.model to javafx.fxml;
 
 }

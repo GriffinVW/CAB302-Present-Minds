@@ -1,4 +1,4 @@
-import com.example.newplan.Event;
+import com.example.newplan.model.Event;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.sql.Timestamp;

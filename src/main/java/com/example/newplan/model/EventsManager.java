@@ -1,8 +1,5 @@
 package com.example.newplan.model;
 
-import com.example.newplan.Event;
-import com.example.newplan.EventDAO;
-
 import java.util.List;
 
 public class EventsManager {

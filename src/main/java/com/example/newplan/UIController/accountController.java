@@ -1,14 +1,14 @@
 package com.example.newplan.UIController;
 
-import com.example.newplan.UserDAO;
+import com.example.newplan.model.UserDAO;
 import com.example.newplan.model.User;
 import com.example.newplan.model.TempUserStorage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -48,6 +48,9 @@ public class accountController implements Controller {
     // Checkboxes on signup page
     @FXML
     private CheckBox carer_account_checkbox;
+
+    @FXML
+    private Label errorLabel;
 
     @Override
     public void initialize() {
