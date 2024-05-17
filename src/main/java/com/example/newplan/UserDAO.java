@@ -26,7 +26,12 @@ public class UserDAO {
                             + "firstName VARCHAR NOT NULL, "
                             + "lastName VARCHAR NOT NULL, "
                             + "email VARCHAR NOT NULL, "
-                            + "password VARCHAR NOT NULL "
+                            + "password VARCHAR NOT NULL, "
+                            + "isCarer BOOLEAN DEFAULT FALSE, "
+                            + "childFirstName VARCHAR, "
+                            + "childLastName VARCHAR, "
+                            + "canEditReminders BOOLEAN DEFAULT FALSE, "
+                            + "canEditRestrictions BOOLEAN DEFAULT FALSE "
                             + ")"
             );
         } catch (SQLException ex) {
@@ -61,6 +66,19 @@ public class UserDAO {
         }
     }
 
+    public void setPassword(String userName, String password) {
+        try {
+            PreparedStatement setPassword = connection.prepareStatement(
+                    "UPDATE userData SET password = ? WHERE userName = ?"
+            );
+            setPassword.setString(1, hashPassword(password));
+            setPassword.setString(2, userName);
+            setPassword.execute();
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+    }
+
     public boolean authenticateUser(String userName, String password) {
         // Retrieve the user's password hash from the database based on the username
         String storedPasswordHash = retrievePassword(userName);
@@ -83,13 +101,18 @@ public class UserDAO {
     public void insert(User user, String password) {
         try {
             PreparedStatement insertUser = connection.prepareStatement(
-                    "INSERT INTO userData (userName, firstName, lastName, email, password) VALUES (?, ?, ?, ?, ?)"
+                    "INSERT INTO userData (userName, firstName, lastName, email, password, isCarer, childFirstName, childLastName, canEditReminders, canEditRestrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
             insertUser.setString(1, user.getUserName());
             insertUser.setString(2, user.getFirstName());
             insertUser.setString(3, user.getLastName());
             insertUser.setString(4, user.getEmail());
-            insertUser.setString(5, hashPassword(password));
+            insertUser.setString(5, password);
+            insertUser.setBoolean(6, user.getIsCarer());
+            insertUser.setString(7, user.getChildFirstName());
+            insertUser.setString(8, user.getChildLastName());
+            insertUser.setBoolean(9, user.getCanEditReminders());
+            insertUser.setBoolean(10, user.getCanEditRestrictions());
 
             insertUser.execute();
         } catch (SQLException ex) {
@@ -127,7 +150,7 @@ public class UserDAO {
             updateAccount.setString(2, user.getFirstName());
             updateAccount.setString(3, user.getLastName());
             updateAccount.setString(4, user.getEmail());
-            updateAccount.setInt(6, user.getId());
+            updateAccount.setInt(5, user.getId());
             updateAccount.execute();
         } catch (SQLException ex) {
             System.err.println(ex);

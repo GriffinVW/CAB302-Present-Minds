@@ -41,12 +41,13 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <TextField fx:id="create_account_last_name" layoutX="43.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" promptText="Last Name" />
-                        <TextField fx:id="create_account_password" layoutX="279.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" promptText="Password" />
-                        <TextField fx:id="create_account_email" layoutX="43.0" layoutY="177.0" prefHeight="25.0" prefWidth="190.0" promptText="Email" />
-                        <TextField fx:id="create_account_reenter_password" layoutX="279.0" layoutY="177.0" prefHeight="25.0" prefWidth="190.0" promptText="Re-Enter Password" />
-                        <CheckBox layoutX="183.0" layoutY="228.0" mnemonicParsing="false" text="Parent / Carer Account" />
-                  <Label fx:id="errorLabel" contentDisplay="CENTER" layoutX="185.0" layoutY="257.0" prefHeight="17.0" prefWidth="172.0" text=" " textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" />
+
+                        <TextField fx:id="create_account_last_name" promptText="Last Name" layoutX="43.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="create_account_password" promptText="Password" layoutX="279.0" layoutY="141.0" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="create_account_email" promptText="Email" layoutX="43.0" layoutY="177.0" prefHeight="25.0" prefWidth="190.0" />
+                        <TextField fx:id="create_account_reenter_password" promptText="Re-Enter Password" layoutX="279.0" layoutY="177.0" prefHeight="25.0" prefWidth="190.0" />
+                        <CheckBox fx:id="carer_account_checkbox" layoutX="183.0" layoutY="236.0" mnemonicParsing="false" text="Parent / Carer Account" />
+                        <Label fx:id="errorLabel" contentDisplay="CENTER" layoutX="185.0" layoutY="257.0" prefHeight="17.0" prefWidth="172.0" text=" " textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" />
                     </children>
                 </Pane>
             </children>

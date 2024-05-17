@@ -69,8 +69,10 @@ public class loginController implements Controller {
         } else {
             System.out.println("User Authentication Failed");
             login_username.setPromptText("Username/Password is Incorrect");
+            login_username.setText("");
             login_username.setStyle("-fx-prompt-text-fill: #ff6666");
             login_password.setPromptText("Username/Password is Incorrect");
+            login_password.setText("");
             login_password.setStyle("-fx-prompt-text-fill: #ff6666");
         }
     }
