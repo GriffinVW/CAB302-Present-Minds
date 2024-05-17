@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -37,13 +38,12 @@ public class restrictionsController implements Controller {
     private Button logout;
     @FXML
     private Button newele;
-//    @FXML
-//    private Pane event_con;
     @FXML
     private TableView<Event> tableView;
 
     @FXML
     private TableColumn<Event, String> columnC1;
+
 
 
 
@@ -62,15 +62,22 @@ public class restrictionsController implements Controller {
         logout.setOnAction(event -> handleNavButtonClick("login", logout));
         newele.setOnAction(event -> handleButtonClick("newele"));
 
+        getChildren();
+
     }
 
-    public void addMoreChildren() {
+    public void getChildren() {
         EventDAO eventDAO = new EventDAO();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal1.set(2024, Calendar.JANUARY, 1, 0, 0, 0);
         cal2.set(2024, Calendar.DECEMBER, 24, 0, 0, 0);
-        List<Event> events = eventDAO.getAllUserPeriod(1, cal1, cal2);
+        List<Event> events = eventDAO.getAllUserPeriodRestrictons(1, cal1, cal2);
+
+
+        for (Event event : events) {
+            System.out.println(event.getDescription());
+        }
 
         ObservableList<Event> data = FXCollections.observableArrayList(events);
 
@@ -86,7 +93,7 @@ public class restrictionsController implements Controller {
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
         if (Objects.equals(buttonId, "newele")) {
-            addMoreChildren();
+            getChildren();
         }
 
     }

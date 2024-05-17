@@ -103,7 +103,6 @@ public class accountController implements Controller {
                 return;
             }
 
-
             // User insertion
             User newUser = new User(username, firstName, lastName, email);
             // if the checkbox is ticked
