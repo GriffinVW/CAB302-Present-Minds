@@ -1,16 +1,14 @@
 package com.example.newplan.UIController;
 
-import com.example.newplan.Event;
-import com.example.newplan.EventDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import com.example.newplan.HelloApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 
 import java.time.Year;
 import java.util.*;
+
 
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
@@ -32,6 +30,7 @@ public class remindersController implements Controller {
     private Button report;
     @FXML
     private Button logout;
+
     @FXML
     private Button newele;
     @FXML
@@ -128,12 +127,14 @@ public class remindersController implements Controller {
         columnC1.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         columnC1.setText("Events");
+
     }
 
 
     @Override
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
+
         if (Objects.equals(buttonId, "newele")) {
             getReminders();
         } else if (Objects.equals(buttonId, "confirm")) {
@@ -143,8 +144,7 @@ public class remindersController implements Controller {
                 return;
             }
 
-            EventDAO eventDAO = new EventDAO();
-            eventDAO.createTable();
+
 
             String titleText = readTextField(title);
             String descritptionText = readTextArea(description);
@@ -210,5 +210,7 @@ public class remindersController implements Controller {
     private int getId(Event event) {
         return event.getEventId();
     }
+
+  }
 
 }

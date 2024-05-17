@@ -14,10 +14,6 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.Label?>
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.newplan.UIController.remindersController">
     <children>
         <AnchorPane prefHeight="417.0" prefWidth="640.0" style="-fx-background-color: A1C0EE;">
@@ -83,17 +79,8 @@
                             </font>
                         </Text>
                         <Pane layoutX="8.0" layoutY="20.0" prefHeight="289.0" prefWidth="224.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-border-color: black; -fx-border-radius: 15px;">
-                        <TableView fx:id="tableView" prefHeight="243.0" prefWidth="224.0">
-                            <columns>
-                                <TableColumn fx:id="columnC1" text="C1" prefWidth="220.0">
-                                    <cellValueFactory>
-                                        <PropertyValueFactory property="title"/>
-                                    </cellValueFactory>
-                                </TableColumn>
-                            </columns>
-                        </TableView>
                      <children>
-                        <Button fx:id="newele" defaultButton="true" layoutX="69.0" layoutY="236.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="New" textFill="WHITE">
+                        <Button defaultButton="true" layoutX="69.0" layoutY="236.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="New" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
@@ -104,11 +91,12 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="confirm" defaultButton="true" layoutX="403.0" layoutY="272.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Confirm" textFill="WHITE">
+                  <Button defaultButton="true" layoutX="403.0" layoutY="272.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" style="-fx-background-color: A8A1ED; -fx-background-radius: 5px;" text="Confirm" textFill="WHITE">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+
                   <TextField fx:id="title" layoutX="254.0" layoutY="44.0" prefHeight="25.0" prefWidth="224.0" promptText="Reminder Name" />
                   <TextArea fx:id="description" layoutX="254.0" layoutY="78.0" prefHeight="78.0" prefWidth="224.0" promptText="Reminder Description" />
                   <TextField fx:id="day" layoutX="253.0" layoutY="170.0" prefHeight="25.0" prefWidth="71.0" promptText="DD" />
@@ -118,6 +106,7 @@
                     <TextField fx:id="min" layoutX="331.0" layoutY="210.0" prefHeight="25.0" prefWidth="71.0" promptText="MM" />
                     <TextField fx:id="hour" layoutX="408.0" layoutY="210.0" prefHeight="25.0" prefWidth="71.0" promptText="HH" />
                         <Label fx:id="errorLabel" contentDisplay="CENTER" layoutX="310.0" layoutY="240.0" prefHeight="17.0" prefWidth="172.0" text=" " textAlignment="CENTER" textFill="RED" textOverrun="CENTER_ELLIPSIS" />
+
                     </children>
                 </Pane>
             </children>
