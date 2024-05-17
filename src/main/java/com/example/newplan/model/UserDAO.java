@@ -1,5 +1,7 @@
 package com.example.newplan.model;
 
+import com.example.newplan.model.*;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -176,7 +178,7 @@ public class UserDAO {
 
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-            try {
+        try {
             Statement getAll = connection.createStatement();
             ResultSet rs = getAll.executeQuery("SELECT id, userName, firstName, lastName, email FROM userData");
             while (rs.next()) {
