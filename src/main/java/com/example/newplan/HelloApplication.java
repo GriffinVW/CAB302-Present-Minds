@@ -40,7 +40,6 @@ public class HelloApplication extends Application {
         UserDAO userDAO = new UserDAO();
         userDAO.createTable();
 
-
         Test();
         EventDAO eventDAO = new EventDAO();
         EventsManager eventsManager = new EventsManager(eventDAO);
