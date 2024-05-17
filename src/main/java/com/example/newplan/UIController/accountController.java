@@ -2,8 +2,13 @@ package com.example.newplan.UIController;
 
 import com.example.newplan.UserDAO;
 import com.example.newplan.model.User;
+import com.example.newplan.model.TempUserStorage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
 
 /**
@@ -39,6 +44,10 @@ public class accountController implements Controller {
 
     @FXML
     private TextField create_account_reenter_password;
+
+    // Checkboxes on signup page
+    @FXML
+    private CheckBox carer_account_checkbox;
 
     @Override
     public void initialize() {
@@ -90,11 +99,25 @@ public class accountController implements Controller {
                 return;
             }
 
-            // user insertion
+
+            // User insertion
             User newUser = new User(username, firstName, lastName, email);
-            userDAO.insert(newUser, password);
-            System.out.println("User created successfully!");
+            // if the checkbox is ticked
+            if (isCheckBoxSelected(carer_account_checkbox)) {
+                // store user data temporarily
+                TempUserStorage.getInstance().storeUser(newUser);
+                // store hashed password temporarily
+                TempUserStorage.getInstance().storeHashedPassword(hashedPassword);
+                // switch to carer sign up page
+                handleNavButtonClick("Carer_Setup", create_account_button);
+            } else {
+                // otherwise, proceed with normal user insertion
+                userDAO.insert(newUser, hashedPassword);
+                updateErrorText(errorLabel, "User created successfully!");
+                System.out.println("User created successfully!");
+                handleNavButtonClick("login", create_account_button);
+            }
+
         }
     }
-
 }

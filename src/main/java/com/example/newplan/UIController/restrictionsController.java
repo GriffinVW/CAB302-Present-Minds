@@ -2,8 +2,19 @@ package com.example.newplan.UIController;
 
 import com.example.newplan.HelloApplication;
 import javafx.fxml.FXML;
+
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
+
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
 
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
@@ -25,6 +36,21 @@ public class restrictionsController implements Controller {
     private Button report;
     @FXML
     private Button logout;
+
+    @FXML
+    private TextField appName;
+    @FXML
+    private TextField fHh;
+    @FXML
+    private TextField fMm;
+    @FXML
+    private TextField fAm;
+    @FXML
+    private TextField toDd;
+    @FXML
+    private TextField toMm;
+    @FXML
+    private TextField toYy;
 
 
 
