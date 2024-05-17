@@ -114,29 +114,32 @@
                      </font>
                   </Text>
                   <Group layoutX="255.0" layoutY="99.0" />
-                  <Text layoutX="353.0" layoutY="156.0" stroke="BLACK" strokeWidth="0.0" style="-fx-font-weight: bold;" text="TO:">
+                  <Text layoutX="353.0" layoutY="180.0" stroke="BLACK" strokeWidth="0.0" style="-fx-font-weight: bold;" text="TO:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
                   <Group layoutX="257.0" layoutY="162.0" />
-                  <TextField layoutX="253.0" layoutY="44.0" prefHeight="25.0" prefWidth="225.0" promptText="App Name" />
-                  <TextField layoutX="255.0" layoutY="100.0" prefHeight="25.0" prefWidth="84.0" promptText="HH" />
-                  <TextField layoutX="351.0" layoutY="100.0" prefHeight="25.0" prefWidth="84.0" promptText="MM" />
-                  <TextField layoutX="443.0" layoutY="100.0" prefHeight="25.0" prefWidth="35.0" promptText="AM" />
-                  <TextField layoutX="255.0" layoutY="165.0" prefHeight="25.0" prefWidth="84.0" promptText="HH" />
-                  <TextField layoutX="351.0" layoutY="165.0" prefHeight="25.0" prefWidth="84.0" promptText="MM" />
-                  <TextField layoutX="443.0" layoutY="165.0" prefHeight="25.0" prefWidth="35.0" promptText="AM" />
+                  <TextField fx:id="appName" layoutX="253.0" layoutY="44.0" prefHeight="25.0" prefWidth="225.0" promptText="App Name" />
+                  <TextField fx:id="fHh" layoutX="255.0" layoutY="100.0" prefHeight="25.0" prefWidth="84.0" promptText="HH" />
+                  <TextField fx:id="fMm" layoutX="351.0" layoutY="100.0" prefHeight="25.0" prefWidth="84.0" promptText="MM" />
+                  <TextField fx:id="fAm" layoutX="443.0" layoutY="100.0" prefHeight="25.0" prefWidth="35.0" promptText="AM" />
+
+                    <TextField fx:id="toDd" layoutX="255.0" layoutY="136.0" prefHeight="25.0" prefWidth="84.0"  promptText="DD" />
+                    <TextField fx:id="toMm" layoutX="351.0" layoutY="136.0" prefHeight="25.0" prefWidth="84.0"  promptText="MM" />
+                    <TextField fx:id="toYy" layoutX="443.0" layoutY="136.0" prefHeight="25.0" prefWidth="35.0" promptText="YYYY" />
+
+
+                  <TextField layoutX="255.0" layoutY="190.0" prefHeight="25.0" prefWidth="84.0" promptText="HH" />
+                  <TextField layoutX="351.0" layoutY="190.0" prefHeight="25.0" prefWidth="84.0" promptText="MM" />
+                  <TextField layoutX="443.0" layoutY="190.0" prefHeight="25.0" prefWidth="35.0" promptText="AM" />
+
+                    <TextField layoutX="255.0" layoutY="226.0" prefHeight="25.0" prefWidth="84.0"  promptText="DD" />
+                    <TextField layoutX="351.0" layoutY="226.0" prefHeight="25.0" prefWidth="84.0"  promptText="MM" />
+                    <TextField layoutX="443.0" layoutY="226.0" prefHeight="25.0" prefWidth="35.0"  promptText="YYYY" />
+
+
                   <Group layoutX="240.0" layoutY="231.0">
-                     <children>
-                        <CheckBox alignment="CENTER" layoutY="2.0" mnemonicParsing="false" style="-fx-background-color: FFFFF0;" text="S" />
-                        <CheckBox alignment="CENTER" layoutX="113.0" layoutY="2.0" mnemonicParsing="false" text="W" />
-                        <CheckBox alignment="CENTER" layoutX="152.0" layoutY="2.0" mnemonicParsing="false" text="T" />
-                        <CheckBox alignment="CENTER" layoutX="38.0" layoutY="2.0" mnemonicParsing="false" text="M" />
-                        <CheckBox alignment="CENTER" layoutX="76.0" layoutY="2.0" mnemonicParsing="false" text="T" />
-                        <CheckBox alignment="CENTER" layoutX="190.0" layoutY="2.0" mnemonicParsing="false" text="F" />
-                        <CheckBox alignment="CENTER" layoutX="228.0" layoutY="2.0" mnemonicParsing="false" text="S" />
-                     </children>
                   </Group>
                     </children>
                 </Pane>

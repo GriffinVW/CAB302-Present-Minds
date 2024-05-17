@@ -5,12 +5,10 @@ import com.example.newplan.EventDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.List;
@@ -44,6 +42,21 @@ public class restrictionsController implements Controller {
     @FXML
     private TableColumn<Event, String> columnC1;
 
+
+    @FXML
+    private TextField appName;
+    @FXML
+    private TextField fHh;
+    @FXML
+    private TextField fMm;
+    @FXML
+    private TextField fAm;
+    @FXML
+    private TextField toDd;
+    @FXML
+    private TextField toMm;
+    @FXML
+    private TextField toYy;
 
 
 
