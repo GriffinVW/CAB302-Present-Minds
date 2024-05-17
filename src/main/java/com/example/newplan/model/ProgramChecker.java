@@ -18,13 +18,16 @@ public class ProgramChecker implements Runnable{
     private EventsManager eventsManager;
     private List<String> restrictedPrograms;
     private List<String> lastOpenedApps;
+    private List<String> ignoredPrograms;
 
     public ProgramChecker(EventDAO eventDAO, AppTrackerDAO appTrackerDAO, EventsManager eventsManager ){
         this.eventDAO = eventDAO;
         this.appTrackerDAO = appTrackerDAO;
         this.eventsManager = eventsManager;
         this.restrictedPrograms = new ArrayList<>();
+        this.ignoredPrograms = new ArrayList<>();
         DefaultRestricedProccess();
+        DefaultIgnoredProccess();
     }
     public List<String> GetRestrictedPrograms(){
         return restrictedPrograms;
@@ -83,6 +86,140 @@ public class ProgramChecker implements Runnable{
         AddRestriction("Minecraft");
         AddRestriction("EXCEL.EXE");
     }
+
+    public void DefaultIgnoredProccess(){
+        AddIgnore("winlogon.exe");
+        AddIgnore("wininit.exe");
+        AddIgnore("unsecapp.exe");
+        AddIgnore("uihost.exe");
+        AddIgnore("tasklist.exe");
+        AddIgnore("taskhostw.exe");
+        AddIgnore("svchost.exe");
+        AddIgnore("steamwebhelper.exe");
+        AddIgnore("steamservice.exe");
+        AddIgnore("sqlwriter.exe");
+        AddIgnore("sqlservr.exe");
+        AddIgnore("sqlceip.exe");
+        AddIgnore("sppsvc.exe");
+        AddIgnore("spoolsv.exe");
+        AddIgnore("smartscreen.exe");
+        AddIgnore("sihost.exe");
+        AddIgnore("services.exe");
+        AddIgnore("servicehost.exe");
+        AddIgnore("officesvcmgr.exe");
+        AddIgnore("msteamsupdate.exe");
+        AddIgnore("msedgewebview2.exe");
+        AddIgnore("mfevtps.exe");
+        AddIgnore("mfemms.exe");
+        AddIgnore("mcshield.exe");
+        AddIgnore("mcoemmgr.exe");
+        AddIgnore("mcapexe.exe");
+        AddIgnore("mcafee-security.exe");
+        AddIgnore("mcafee-security-ft.exe");
+        AddIgnore("mc-webview-cnt.exe");
+        AddIgnore("lsass.exe");
+        AddIgnore("jhi_service.exe");
+        AddIgnore("java.exe");
+        AddIgnore("igfxCUIServiceN.exe");
+        AddIgnore("gamingservicesnet.exe");
+        AddIgnore("gamingservices.exe");
+        AddIgnore("fsnotifier.exe");
+        AddIgnore("fontdrvhost.exe");
+        AddIgnore("figma_agent.exe");
+        AddIgnore("explorer.exe");
+        AddIgnore("esif_uf.exe");
+        AddIgnore("dwm.exe");
+        AddIgnore("dllhost.exe");
+        AddIgnore("dasHost.exe");
+        AddIgnore("ctfmon.exe");
+        AddIgnore("csrss.exe");
+        AddIgnore("conhost.exe");
+        AddIgnore("cmd.exe");
+        AddIgnore("backgroundTaskHost.exe");
+        AddIgnore("audiodg.exe");
+        AddIgnore("armsvc.exe");
+        AddIgnore("XboxGameBarWidgets.exe");
+        AddIgnore("WmiPrvSE.exe");
+        AddIgnore("WmiApSrv.exe");
+        AddIgnore("WindowsTerminal.exe");
+        AddIgnore("Widgets.exe");
+        AddIgnore("WidgetService.exe");
+        AddIgnore("WUDFHost.exe");
+        AddIgnore("WMIRegistrationService.exe");
+        AddIgnore("VSSVC.exe");
+        AddIgnore("UserOOBEBroker.exe");
+        AddIgnore("TrustedInstaller.exe");
+        AddIgnore("TiWorker.exe");
+        AddIgnore("Taskmgr.exe");
+        AddIgnore("SystemSettingsBroker.exe");
+        AddIgnore("SystemSettingsAdminFlows.exe");
+        AddIgnore("SystemSettings.exe");
+        AddIgnore("System Idle Process");
+        AddIgnore("System");
+        AddIgnore("StartMenuExperienceHost.exe");
+        AddIgnore("ShellExperienceHost.exe");
+        AddIgnore("SecurityHealthSystray.exe");
+        AddIgnore("SecurityHealthService.exe");
+        AddIgnore("SearchIndexer.exe");
+        AddIgnore("SearchHost.exe");
+        AddIgnore("SSScheduler.exe");
+        AddIgnore("SQLAGENT.EXE");
+        AddIgnore("RuntimeBroker.exe");
+        AddIgnore("RtkUWP.exe");
+        AddIgnore("RtkBtManServ.exe");
+        AddIgnore("RtkAudUService64.exe");
+        AddIgnore("RstMwService.exe");
+        AddIgnore("Registry");
+        AddIgnore("RdClient.Windows.exe");
+        AddIgnore("ProtectedModuleHost.exe");
+        AddIgnore("PhoneExperienceHost.exe");
+        AddIgnore("PEFService.exe");
+        AddIgnore("OpenConsole.exe");
+        AddIgnore("OobeHook.exe");
+        AddIgnore("OneDrive.exe");
+        AddIgnore("OneApp.IGCC.WinService.exe");
+        AddIgnore("OfficeClickToRun.exe");
+        AddIgnore("ONENOTEM.EXE");
+        AddIgnore("NisSrv.exe");
+        AddIgnore("MsMpEng.exe");
+        AddIgnore("MpDefenderCoreService.exe");
+        AddIgnore("ModuleCoreService.exe");
+        AddIgnore("MoUsoCoreWorker.exe");
+        AddIgnore("MicrosoftEdgeUpdate.exe");
+        AddIgnore("MfeAVSvc.exe");
+        AddIgnore("Memory Compression");
+        AddIgnore("McUpdaterModule.exe");
+        AddIgnore("McCSPServiceHost.exe");
+        AddIgnore("MMSSHOST.exe");
+        AddIgnore("LogonUI.exe");
+        AddIgnore("LockApp.exe");
+        AddIgnore("LocationNotificationWindows.exe");
+        AddIgnore("IntelCpHDCPSvc.exe");
+        AddIgnore("IntelAudioService.exe");
+        AddIgnore("HxTsr.exe");
+        AddIgnore("GameBar.exe");
+        AddIgnore("FileOpenManager64.exe");
+        AddIgnore("FileOpenBroker64.exe");
+        AddIgnore("FileCoAuth.exe");
+        AddIgnore("DtsApo4Service.exe");
+        AddIgnore("DADUpdater.exe");
+        AddIgnore("AsusWiFiSmartConnect.exe");
+        AddIgnore("AsusSystemDiagnosis.exe");
+        AddIgnore("AsusSystemAnalysis.exe");
+        AddIgnore("AsusSwitch.exe");
+        AddIgnore("AsusSoftwareManagerAgent.exe");
+        AddIgnore("AsusSoftwareManager.exe");
+        AddIgnore("AsusScreenXpertUI.exe");
+        AddIgnore("AsusScreenXpertReunion.exe");
+        AddIgnore("AsusScreenXpertHostService.exe");
+        AddIgnore("AsusOptimizationStartupTask.exe");
+        AddIgnore("AsusOptimization.exe");
+        AddIgnore("AsusOSD.exe");
+        AddIgnore("AsusAppService.exe");
+        AddIgnore("ApplicationFrameHost.exe");
+        AddIgnore("AggregatorHost.exe");
+
+    }
     public void AddRestriction(String processName){
         if (!restrictedPrograms.contains(processName)){
             restrictedPrograms.add(processName);
@@ -92,6 +229,14 @@ public class ProgramChecker implements Runnable{
         restrictedPrograms.remove(processName);
     }
 
+    public void AddIgnore(String processName){
+        if (!ignoredPrograms.contains(processName)){
+            ignoredPrograms.add(processName);
+        }
+    }
+    public void RemoveIgnore(String processName){
+        ignoredPrograms.remove(processName);
+    }
     public static List<String> getRunningRestrictedProcesses(List<String> processNames) {
         Set<String> uniqueProcesses = new HashSet<>();
         try {
@@ -132,17 +277,30 @@ public class ProgramChecker implements Runnable{
         return new ArrayList<>(uniqueProcesses);
     }
 
+    public List<String> ignorePrograms(List<String> runningPrograms) {
+        List<String> newList = new ArrayList<>();
+        for (String app: runningPrograms) {
+            if (!ignoredPrograms.contains(app)) {
+                newList.add(app);
+            }
+        }
+        return newList;
+    }
+
     public void updateAppTracker() {
         if (lastOpenedApps == null) {
-            lastOpenedApps = getRunningProcesses();
+            lastOpenedApps = ignorePrograms(getRunningProcesses());
         } else {
-            List<String> runningApps = getRunningProcesses();
+            List<String> runningApps = ignorePrograms(getRunningProcesses());
+            int appCount = 0;
             for (String app: runningApps) {
                 if (lastOpenedApps.contains(app)) {
                     appTrackerDAO.update(app);
+                    appCount++;
                 }
             }
             // update last opened apps
+            System.out.println(appCount + " apps have been updated in the App Tracker.");
             lastOpenedApps = runningApps;
         }
     }

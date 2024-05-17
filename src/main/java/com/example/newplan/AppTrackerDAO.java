@@ -42,8 +42,8 @@ public class AppTrackerDAO {
             ResultSet rs = checkApp.executeQuery();
 
             if (rs.next()) {
-                if (rs.getInt(1) > 0) System.out.println(appName + " has already been opened on " + currentDate);
-                else System.out.println(appName + " has not been opened on " + currentDate);
+                // if (rs.getInt(1) > 0) System.out.println(appName + " has already been opened on " + currentDate);
+                // else System.out.println(appName + " has not been opened on " + currentDate);
                 return rs.getInt(1) > 0;  // If the count is greater than 0 then the app exists today
             }
         } catch (SQLException ex) {
@@ -82,9 +82,9 @@ public class AppTrackerDAO {
             insertApp.setString(2, currentDate);
             insertApp.setInt(3, 5);
             insertApp.execute();
-            System.out.println(
-                    appName + " has been added to the app tracker for " + currentDate
-            );
+//            System.out.println(
+//                    appName + " has been added to the app tracker for " + currentDate
+//            );
         } catch (SQLException ex) {
             System.err.println("Database error: " + ex.getMessage());
         }
@@ -103,9 +103,9 @@ public class AppTrackerDAO {
                 updateTimeLog.setString(2, appName);
                 updateTimeLog.setString(3, currentDate);
                 updateTimeLog.execute();
-                System.out.println(
-                        appName + " has been updated from " + appTime + "min to " + newTime  +  "min for " + currentDate
-                );
+//                System.out.println(
+//                        appName + " has been updated from " + appTime + "min to " + newTime  +  "min for " + currentDate
+//                );
             } else {
                 insert(appName);
             }
