@@ -2,6 +2,7 @@ package com.example.newplan.UIController;
 
 import com.example.newplan.model.Event;
 import com.example.newplan.model.EventDAO;
+import com.example.newplan.model.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.Year;
 import java.util.*;
-
 
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
@@ -99,13 +99,16 @@ public class remindersController implements Controller {
                 title.setText(getTitle(newSelection));
                 description.setText(getDescription(newSelection));
 
-                day.setText(String.valueOf(getStartTime(newSelection).getInstance().get(Calendar.DAY_OF_MONTH)));
-                month.setText(String.valueOf(getStartTime(newSelection).getInstance().get(Calendar.MONTH) - 1));
-                year.setText(String.valueOf(getStartTime(newSelection).getInstance().get(Calendar.YEAR)));
+                day.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_MONTH)));
+                month.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH)));
+                year.setText(String.valueOf(newSelection.getStartTime().get(Calendar.YEAR)));
 
-                min.setText(String.valueOf(getStartTime(newSelection).getInstance().get(Calendar.MINUTE)));
-                second.setText(String.valueOf(getStartTime(newSelection).getInstance().get(Calendar.SECOND)));
-                hour.setText(String.valueOf(getStartTime(newSelection).getInstance().get(Calendar.HOUR_OF_DAY)));
+
+                min.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MINUTE)));
+                second.setText(String.valueOf(newSelection.getStartTime().get(Calendar.SECOND)));
+                hour.setText(String.valueOf(newSelection.getStartTime().get(Calendar.HOUR_OF_DAY)));
+
+
 
             }
         });
@@ -118,7 +121,7 @@ public class remindersController implements Controller {
         cal1.set(2024, Calendar.JANUARY, 1, 0, 0, 0);
         cal2.set(2200, Calendar.DECEMBER, 24, 0, 0, 0);
 
-        List<Event> events = eventDAO.getAllUserPeriodReminders(1, cal1, cal2);
+        List<Event> events = eventDAO.getAllUserPeriodReminders(SessionManager.getInstance().getUserId(), cal1, cal2);
         for (Event event : events) {
             System.out.println(event.getDescription());
         }
@@ -149,7 +152,6 @@ public class remindersController implements Controller {
             }
 
 
-
             String titleText = readTextField(title);
             String descritptionText = readTextArea(description);
 
@@ -178,7 +180,7 @@ public class remindersController implements Controller {
                 Calendar cal = Calendar.getInstance();
                 cal.set(yearInt, monthInt, dayInt, hourInt, minInt, secondInt);
                 Event event = new Event(titleText, descritptionText, cal, cal, false, true);
-                eventDAO.insert(event, 1);
+                eventDAO.insert(event, SessionManager.getInstance().getUserId());
 
                 System.out.println("day " + dayInt + " month " + monthInt + " year " + yearInt + " min " + minInt + " second " + secondInt + " hour " + hourInt);
                 getReminders();

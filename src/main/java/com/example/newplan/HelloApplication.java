@@ -4,6 +4,7 @@ import com.example.newplan.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import com.example.newplan.model.ProgramChecker;
 import java.io.IOException;
@@ -24,6 +25,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("index.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
 //        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+
+
         stage.setTitle("Present-Minds!");
         stage.setScene(scene);
         stage.show();
