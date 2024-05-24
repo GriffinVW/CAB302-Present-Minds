@@ -3,6 +3,7 @@ package com.example.newplan.UIController;
 import com.example.newplan.HelloApplication;
 import com.example.newplan.model.Event;
 import com.example.newplan.model.EventDAO;
+import com.example.newplan.model.ProgramChecker;
 import com.example.newplan.model.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -110,16 +111,17 @@ public class restrictionsController implements Controller {
 
                 appName.setText(getTitle(newSelection));
 
-
             }
         });
+
+
     }
 
     public void getRestrictions() {
         EventDAO eventDAO = new EventDAO();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        cal1.set(2024, Calendar.JANUARY, 1, 0, 0, 0);
+        cal1.set(2000, Calendar.JANUARY, 1, 0, 0, 0);
         cal2.set(2200, Calendar.DECEMBER, 24, 0, 0, 0);
 
         List<Event> events = eventDAO.getAllUserPeriodRestrictons(SessionManager.getInstance().getUserId(), cal1, cal2);
@@ -135,11 +137,15 @@ public class restrictionsController implements Controller {
 
         columnC1.setText("Events");
 
+
+
     }
 
     private void confirmClk() {
         EventDAO eventDAO = new EventDAO();
         String titleText = readTextField(appName);
+
+        System.out.println(titleText);
 
         try {
             int toHour = Integer.parseInt(readTextField(toHh));

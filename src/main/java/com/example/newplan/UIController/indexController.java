@@ -1,10 +1,18 @@
 package com.example.newplan.UIController;
 
 import com.example.newplan.HelloApplication;
+import com.example.newplan.model.AppTrackerDAO;
+import com.example.newplan.model.EventDAO;
+import com.example.newplan.model.EventsManager;
+import com.example.newplan.model.ProgramChecker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 // This is an example controller utilizing the settings page, to change pages you need to edit the HelloApplication Class
@@ -44,6 +52,9 @@ public class indexController implements Controller {
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));
         report.setOnAction(event -> handleNavButtonClick("Screen_Time", report));
         logout.setOnAction(event -> handleNavButtonClick("login", logout));
+
+
+
     }
 
     @Override

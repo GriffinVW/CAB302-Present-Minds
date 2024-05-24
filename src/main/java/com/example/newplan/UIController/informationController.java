@@ -41,6 +41,8 @@ public class informationController implements Controller {
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));
         report.setOnAction(event -> handleNavButtonClick("Screen_Time", report));
         logout.setOnAction(event -> handleNavButtonClick("login", logout));
+
+
     }
 
     @Override

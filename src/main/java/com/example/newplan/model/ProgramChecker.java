@@ -3,10 +3,7 @@ package com.example.newplan.model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ProgramChecker implements Runnable{
     private EventDAO eventDAO;
@@ -22,7 +19,7 @@ public class ProgramChecker implements Runnable{
         this.eventsManager = eventsManager;
         this.restrictedPrograms = new ArrayList<>();
         this.ignoredPrograms = new ArrayList<>();
-        DefaultRestricedProccess();
+
         DefaultIgnoredProccess();
     }
     public List<String> GetRestrictedPrograms(){
@@ -31,10 +28,15 @@ public class ProgramChecker implements Runnable{
 
     @Override
     public void run() {
+
+
         eventDAO = new EventDAO();
         eventsManager = new EventsManager(eventDAO);
         updateAppTracker();
+        updateRestrictedPrograms();
+
         if (restrictionActive()){
+
             List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
             List<String> list = new ArrayList<String>();
             list.add("");
@@ -44,8 +46,30 @@ public class ProgramChecker implements Runnable{
             }
         }
 
-
     }
+
+    void updateRestrictedPrograms() {
+        Integer id = SessionManager.getInstance().getUserId();
+
+        System.out.println(id);
+
+        this.restrictedPrograms = new ArrayList<>();
+        DefaultRestricedProccess();
+
+        if (id != null) {
+            Calendar cal1 = Calendar.getInstance();
+            Calendar cal2 = Calendar.getInstance();
+            cal1.set(2000, Calendar.JANUARY, 1, 0, 0, 0);
+            cal2.set(2200, Calendar.DECEMBER, 24, 0, 0, 0);
+
+            List<Event> events = eventDAO.getAllUserPeriodRestrictons(id, cal1, cal2);
+            for (Event event : events) {
+                System.out.println(event.getTitle() + "test");
+                AddRestriction(event.getTitle());
+            }
+        }
+    }
+
     void DisplayWarning(List<String> restrictedRunning){
         return;
     }
@@ -234,6 +258,7 @@ public class ProgramChecker implements Runnable{
         ignoredPrograms.remove(processName);
     }
     public static List<String> getRunningRestrictedProcesses(List<String> processNames) {
+
         Set<String> uniqueProcesses = new HashSet<>();
         try {
             Process process = Runtime.getRuntime().exec("tasklist /fo csv /nh");
@@ -241,6 +266,7 @@ public class ProgramChecker implements Runnable{
             String line;
             while ((line = reader.readLine()) != null) {
                 for (String processName : processNames) {
+
                     if (line.contains(processName)) {
                         uniqueProcesses.add(processName);
                         break;

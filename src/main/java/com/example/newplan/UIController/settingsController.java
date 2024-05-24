@@ -70,6 +70,8 @@ public class settingsController implements Controller {
         user_name.setText(tempuser.getUserName());
 
         confirm_button.setOnAction(actionEvent -> handleConfirmButtonClick());
+
+
     }
 
     @Override
