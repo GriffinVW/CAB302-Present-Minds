@@ -1,5 +1,6 @@
 package com.example.newplan.model;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -39,15 +40,27 @@ public class ProgramChecker implements Runnable{
             List<String> list = new ArrayList<String>();
             list.add("");
             if (!restrictedRunning.equals(list)){
-                DisplayWarning(restrictedRunning);
-                ClosePrograms(restrictedRunning);
+                try {
+                    DisplayWarning(restrictedRunning);
+                } catch (AWTException e) {
+                    throw new RuntimeException(e);
+                }
+                //ClosePrograms(restrictedRunning);
             }
         }
 
 
     }
-    void DisplayWarning(List<String> restrictedRunning){
-        return;
+    void DisplayWarning(List<String> restrictedRunning) throws AWTException {
+        for (String app: restrictedRunning){
+            if (SystemTray.isSupported()) {
+                TrayIconNotification td = new TrayIconNotification();
+                td.displayTray(app);
+            } else {
+                System.err.println("System tray not supported!");
+            }
+        }
+
     }
 
    public void ClosePrograms(List<String> restrictedRunning){
