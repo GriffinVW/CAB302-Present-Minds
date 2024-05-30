@@ -1,5 +1,6 @@
 package com.example.newplan.model;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,9 +10,11 @@ public class ProgramChecker implements Runnable{
     private EventDAO eventDAO;
     private AppTrackerDAO appTrackerDAO;
     private EventsManager eventsManager;
+    private SessionManager sessionManager = SessionManager.getInstance();
     private List<String> restrictedPrograms;
     private List<String> lastOpenedApps;
     private List<String> ignoredPrograms;
+    private List<Event> reminders;
 
     public ProgramChecker(EventDAO eventDAO, AppTrackerDAO appTrackerDAO, EventsManager eventsManager ){
         this.eventDAO = eventDAO;
@@ -19,7 +22,7 @@ public class ProgramChecker implements Runnable{
         this.eventsManager = eventsManager;
         this.restrictedPrograms = new ArrayList<>();
         this.ignoredPrograms = new ArrayList<>();
-
+        this.reminders = eventsManager.getRemindersNow();
         DefaultIgnoredProccess();
     }
     public List<String> GetRestrictedPrograms(){
@@ -35,14 +38,25 @@ public class ProgramChecker implements Runnable{
         updateAppTracker();
         updateRestrictedPrograms();
 
+        if (reminderActive()) {
+            try {
+                DisplayReminder(reminderList());
+            } catch (AWTException e) {
+                throw new RuntimeException(e);
+            }
+        }
         if (restrictionActive()){
 
             List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
             List<String> list = new ArrayList<String>();
             list.add("");
             if (!restrictedRunning.equals(list)){
-                DisplayWarning(restrictedRunning);
-                ClosePrograms(restrictedRunning);
+                try {
+                    DisplayWarning(restrictedRunning);
+                } catch (AWTException e) {
+                    throw new RuntimeException(e);
+                }
+                //ClosePrograms(restrictedRunning);
             }
         }
 
@@ -69,9 +83,28 @@ public class ProgramChecker implements Runnable{
             }
         }
     }
+    void DisplayWarning(List<String> restrictedRunning) throws AWTException {
+        for (String app: restrictedRunning){
+            if (SystemTray.isSupported()) {
+                TrayIconNotification td = new TrayIconNotification();
+                td.displayTray(app,"Restricted Apps Found!","has been closed");
+            } else {
+                System.err.println("System tray not supported!");
+            }
+        }
 
-    void DisplayWarning(List<String> restrictedRunning){
-        return;
+    }
+    void DisplayReminder(List<Event> reminders) throws AWTException {
+        for (Event event: reminders){
+            if (SystemTray.isSupported()) {
+                TrayIconNotification td = new TrayIconNotification();
+                String bob = event.getTitle();
+                td.displayTray(event.getTitle(),"New Reminder!","");
+            } else {
+                System.err.println("System tray not supported!");
+            }
+        }
+
     }
 
    public void ClosePrograms(List<String> restrictedRunning){
@@ -101,6 +134,16 @@ public class ProgramChecker implements Runnable{
         // Implement process checking logic here
         return null; // Placeholder return value
     }
+    private List<Event> reminderList(){
+        return eventsManager.getRemindersNow();
+    }
+
+    private boolean reminderActive(){
+        System.out.println(reminderList());
+        System.out.println("bob");
+        return reminderList() != null;
+    }
+
     public void DefaultRestricedProccess(){
         AddRestriction("NotePad");
         AddRestriction("Minecraft");
@@ -322,7 +365,7 @@ public class ProgramChecker implements Runnable{
                 }
             }
             // update last opened apps
-            System.out.println(appCount + " apps have been updated in the App Tracker.");
+            System.out.println(appCount + " apps have been updated in the App Tracker for user with ID " + sessionManager.getUserId());
             lastOpenedApps = runningApps;
         }
     }
