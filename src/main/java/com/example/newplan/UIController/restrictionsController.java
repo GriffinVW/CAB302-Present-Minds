@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import org.w3c.dom.Text;
 
+import java.time.Year;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
@@ -46,6 +47,9 @@ public class restrictionsController implements Controller {
     private Button newele;
     @FXML
     private Button confirm;
+    @FXML
+    private Button delete;
+
 
 
     @FXML
@@ -66,9 +70,12 @@ public class restrictionsController implements Controller {
     @FXML
     private TextField fYy;
     @FXML
-    private TextField fMmin;
+    private TextField fMin;
     @FXML
     private TextField fDd;
+
+    @FXML
+    private Label errorLabel;
 
 
     @FXML
@@ -85,11 +92,12 @@ public class restrictionsController implements Controller {
     private TextField toYy;
 
     int id = 0;
-
+    Event selected;
 
     // You need to assign a function to each of the buttons here
     @Override
     public void initialize() {
+        updateErrorText(errorLabel, " ");
         System.out.println("Initialization complete");
 
         // Add handlers for the buttons
@@ -100,27 +108,29 @@ public class restrictionsController implements Controller {
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));
         report.setOnAction(event -> handleNavButtonClick("Screen_Time", report));
         logout.setOnAction(event -> handleNavButtonClick("login", logout));
+        delete.setOnAction(event -> delete());
 
-        newele.setOnAction(event -> handleButtonClick("new"));
+        newele.setOnAction(event -> handleNavButtonClick("Restrictions", restrictions));
         confirm.setOnAction(event -> confirmClk());
         getRestrictions();
 
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 id = getId(newSelection);
+                selected = newSelection;
 
                 appName.setText(getTitle(newSelection));
 
                 fMm.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH)));
-                fHh.setText(String.valueOf(newSelection.getStartTime().get(Calendar.HOUR_OF_DAY)));
-                fMmin.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MINUTE)));
-                fDd.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_WEEK)));
+                fHh.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_MONTH)));
+                fMin.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MINUTE)));
+                fDd.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_MONTH)));
                 fYy.setText(String.valueOf(newSelection.getStartTime().get(Calendar.YEAR)));
 
                 toMm.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MONTH)));
                 toHh.setText(String.valueOf(newSelection.getEndTime().get(Calendar.HOUR_OF_DAY)));
                 toMmin.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MINUTE)));
-                toDd.setText(String.valueOf(newSelection.getEndTime().get(Calendar.DAY_OF_WEEK)));
+                toDd.setText(String.valueOf(newSelection.getEndTime().get(Calendar.DAY_OF_MONTH)));
                 toYy.setText(String.valueOf(newSelection.getEndTime().get(Calendar.YEAR)));
 
                 System.out.println(newSelection.getStartTime());
@@ -156,6 +166,7 @@ public class restrictionsController implements Controller {
     }
 
     private void confirmClk() {
+        updateErrorText(errorLabel, " ");
         EventDAO eventDAO = new EventDAO();
         String titleText = readTextField(appName);
 
@@ -166,32 +177,115 @@ public class restrictionsController implements Controller {
             int toMin = Integer.parseInt(readTextField(toMmin));
 
             int today = Integer.parseInt(readTextField(toDd));
-            int toMonth = Integer.parseInt(readTextField(toMm));
+            int toMonthInt = Integer.parseInt(readTextField(toMm));
             int toYear = Integer.parseInt(readTextField(toYy));
 
             int fHour = Integer.parseInt(readTextField(fHh));
-            int fMin = Integer.parseInt(readTextField(fMmin));
+            int fMinute = Integer.parseInt(readTextField(fMin));
 
             int fDay = Integer.parseInt(readTextField(fDd));
-            int fMonth = Integer.parseInt(readTextField(fMm));
+            int fMonthInt = Integer.parseInt(readTextField(fMm));
             int fYear = Integer.parseInt(readTextField(fYy));
 
+            if (fYear > 2100 || toYear > 2100) {
+                System.out.println("This date is too far away");
+                updateErrorText(errorLabel, "This date is too far away");
+                return;
+            } else if (fYear < Year.now().getValue() || toYear < Year.now().getValue()) {
+                System.out.println("This date is in the past");
+                updateErrorText(errorLabel, "This date is in the past, please choose a future date");
+                return;
+            } else if (fMonthInt < 1 || fMonthInt > 12 || fHour > 23 || toMonthInt < 1 || toMonthInt > 12 || toHour > 23 || fMinute > 59 || toMin > 59 || today < 1 || today > 31 || fDay < 1 || fDay > 31) {
+                System.out.println("Impossible date");
+                updateErrorText(errorLabel, "Impossible date");
+                return;
+            }
 
-            Calendar cal = Calendar.getInstance();
+            int fMonth;
+            int toMonth;
+
+            switch (fMonthInt) {
+                case 1: fMonth = Calendar.JANUARY; break;
+                case 2: fMonth = Calendar.FEBRUARY; break;
+                case 3: fMonth = Calendar.MARCH; break;
+                case 4: fMonth = Calendar.APRIL; break;
+                case 5: fMonth = Calendar.MAY; break;
+                case 6: fMonth = Calendar.JUNE; break;
+                case 7: fMonth = Calendar.JULY; break;
+                case 8: fMonth = Calendar.AUGUST; break;
+                case 9: fMonth = Calendar.SEPTEMBER; break;
+                case 10: fMonth = Calendar.OCTOBER; break;
+                case 11: fMonth = Calendar.NOVEMBER; break;
+                case 12: fMonth = Calendar.DECEMBER; break;
+                default:
+                    System.out.println("Invalid month");
+                    updateErrorText(errorLabel, "Invalid month");
+                    return;
+            }
+
+            switch (toMonthInt) {
+                case 1: toMonth = Calendar.JANUARY; break;
+                case 2: toMonth = Calendar.FEBRUARY; break;
+                case 3: toMonth = Calendar.MARCH; break;
+                case 4: toMonth = Calendar.APRIL; break;
+                case 5: toMonth = Calendar.MAY; break;
+                case 6: toMonth = Calendar.JUNE; break;
+                case 7: toMonth = Calendar.JULY; break;
+                case 8: toMonth = Calendar.AUGUST; break;
+                case 9: toMonth = Calendar.SEPTEMBER; break;
+                case 10: toMonth = Calendar.OCTOBER; break;
+                case 11: toMonth = Calendar.NOVEMBER; break;
+                case 12: toMonth = Calendar.DECEMBER; break;
+                default:
+                    System.out.println("Invalid month");
+                    updateErrorText(errorLabel, "Invalid month");
+                    return;
+            }
+
+            Calendar cal1 = Calendar.getInstance();
             Calendar cal2 = Calendar.getInstance();
-            cal.set(fYear, fMonth, fDay, fHour, fMin);
+            cal1.set(2000, Calendar.JANUARY, 1, 0, 0, 0);
+            cal2.set(2200, Calendar.DECEMBER, 24, 0, 0, 0);
+
+            List<Event> events = eventDAO.getAllUserPeriodRestrictons(SessionManager.getInstance().getUserId(), cal1, cal2);
+            for (Event event : events) {
+                System.out.println(event.getTitle());
+
+                if (Objects.equals(event.getTitle(), titleText)) {
+                    System.out.println("Needs unique name");
+                    updateErrorText(errorLabel, "Needs unique name");
+                    return;
+                }
+            }
+
+            cal1.set(fYear, fMonth, fDay, fHour, fMinute);
             cal2.set(toYear, toMonth, today, toHour, toMin);
 
-            Event event = new Event(titleText, "", cal, cal2, true, false);
+            Event event = new Event(titleText, "", cal1, cal2, true, false);
             eventDAO.insert(event, SessionManager.getInstance().getUserId());
 
             getRestrictions();
         } catch (NumberFormatException ex) {
-            System.out.println("error");
+            System.out.println("Invalid Number");
+            updateErrorText(errorLabel, "Invalid Number");
         }
-        
+
+
     }
 
+    public void delete() {
+        EventDAO eventDAO = new EventDAO();
+        if (selected != null) {
+            System.out.println(selected.getTitle() + " removed");
+            System.out.println(selected.getEventId() + " removed");
+            eventDAO.delete(selected.getTitle());
+            getRestrictions();
+        } else {
+            System.out.println("Please Select Event");
+            updateErrorText(errorLabel, "Please Select Event");
+//            updateErrorText(errorLabel, "Please Select Event");
+        }
+    }
     @Override
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);

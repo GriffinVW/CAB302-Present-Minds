@@ -72,10 +72,10 @@ public class EventDAO {
             System.err.println(ex);
         }
     }
-    public void delete(int eventId) {
+    public void delete(String eventId) {
         try {
-            PreparedStatement deleteEvent = connection.prepareStatement("DELETE FROM event WHERE eventId = ?");
-            deleteEvent.setInt(1, eventId);
+            PreparedStatement deleteEvent = connection.prepareStatement("DELETE FROM event WHERE title = ?");
+            deleteEvent.setString(1, eventId);
             deleteEvent.execute();
         } catch (SQLException ex) {
             System.err.println(ex);
