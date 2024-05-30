@@ -44,7 +44,7 @@ public class HelloApplication extends Application {
         AppTrackerDAO appTrackerDAO = new AppTrackerDAO();
         appTrackerDAO.createTable();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,1, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,5, TimeUnit.MINUTES);
         launch();
         userDAO.close();
 //        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);

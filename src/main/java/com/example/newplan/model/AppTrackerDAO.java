@@ -1,8 +1,11 @@
 package com.example.newplan.model;
 
 import com.example.newplan.model.*;
+import javafx.util.Pair;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppTrackerDAO {
     private Connection connection;
@@ -68,6 +71,61 @@ public class AppTrackerDAO {
             System.err.println("Database error: " + ex.getMessage());
         }
         return 0;
+    }
+
+    public List<Pair<String, Integer>> getDailyAppUsageData() {
+        List<Pair<String, Integer>> appUsageList = new ArrayList<>();
+        String currentDate = String.valueOf(java.time.LocalDateTime.now()).substring(0,10);
+        try {
+
+            PreparedStatement getTime = connection.prepareStatement(
+                    "SELECT appName, timeLog FROM appTracker WHERE date = ? and id = ?"
+            );
+            getTime.setString(1, currentDate);
+            getTime.setInt(2, sessionManager.getUserId());
+
+            ResultSet rs = getTime.executeQuery();
+
+            // Loop through the result set and populate the list
+            while (rs.next()) {
+                String appName = rs.getString("appName");
+                int minutesOpen = rs.getInt("timeLog");
+
+                appUsageList.add(new Pair<>(appName, minutesOpen));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Database error: " + ex.getMessage());
+        }
+        return appUsageList;
+    }
+
+    public List<Pair<String, Integer>> getWeeklyAppUsageData() {
+        List<Pair<String, Integer>> appUsageList = new ArrayList<>();
+        String currentDate = String.valueOf(java.time.LocalDateTime.now()).substring(0,10);
+
+        try {
+
+            PreparedStatement getTime = connection.prepareStatement(
+                    "SELECT appName, SUM(timeLog) as timeSum FROM appTracker WHERE date >= date(?, '-7 days') AND date <= ? and id = ? GROUP BY appName"
+
+            );
+            getTime.setString(1, currentDate);
+            getTime.setString(2, currentDate);
+            getTime.setInt(3, sessionManager.getUserId());
+
+            ResultSet rs = getTime.executeQuery();
+
+            // Loop through the result set and populate the list
+            while (rs.next()) {
+                String appName = rs.getString("appName");
+                int minutesOpen = rs.getInt("timeSum");
+
+                appUsageList.add(new Pair<>(appName, minutesOpen));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Database error: " + ex.getMessage());
+        }
+        return appUsageList;
     }
 
 
