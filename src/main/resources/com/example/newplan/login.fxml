@@ -33,7 +33,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Hyperlink layoutX="49.0" layoutY="335.0" text="Don't have an account? SIgn Up" />
+<!--                        <Hyperlink layoutX="49.0" layoutY="335.0" text="Don't have an account? SIgn Up" />-->
                     </children>
                 </Pane>
             </children>
