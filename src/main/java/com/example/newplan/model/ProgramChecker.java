@@ -13,6 +13,7 @@ public class ProgramChecker implements Runnable{
     private EventDAO eventDAO;
     private AppTrackerDAO appTrackerDAO;
     private EventsManager eventsManager;
+    private SessionManager sessionManager = SessionManager.getInstance();
     private List<String> restrictedPrograms;
     private List<String> lastOpenedApps;
     private List<String> ignoredPrograms;
@@ -340,7 +341,7 @@ public class ProgramChecker implements Runnable{
                 }
             }
             // update last opened apps
-            System.out.println(appCount + " apps have been updated in the App Tracker.");
+            System.out.println(appCount + " apps have been updated in the App Tracker for user with ID " + sessionManager.getUserId());
             lastOpenedApps = runningApps;
         }
     }
