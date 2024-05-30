@@ -111,6 +111,20 @@ public class restrictionsController implements Controller {
 
                 appName.setText(getTitle(newSelection));
 
+                fMm.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH)));
+                fHh.setText(String.valueOf(newSelection.getStartTime().get(Calendar.HOUR_OF_DAY)));
+                fMmin.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MINUTE)));
+                fDd.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_WEEK)));
+                fYy.setText(String.valueOf(newSelection.getStartTime().get(Calendar.YEAR)));
+
+                toMm.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MONTH)));
+                toHh.setText(String.valueOf(newSelection.getEndTime().get(Calendar.HOUR_OF_DAY)));
+                toMmin.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MINUTE)));
+                toDd.setText(String.valueOf(newSelection.getEndTime().get(Calendar.DAY_OF_WEEK)));
+                toYy.setText(String.valueOf(newSelection.getEndTime().get(Calendar.YEAR)));
+
+                System.out.println(newSelection.getStartTime());
+
             }
         });
 
