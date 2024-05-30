@@ -16,6 +16,7 @@ public class ProgramChecker implements Runnable{
     private List<String> restrictedPrograms;
     private List<String> lastOpenedApps;
     private List<String> ignoredPrograms;
+    private List<Event> reminders;
 
     public ProgramChecker(EventDAO eventDAO, AppTrackerDAO appTrackerDAO, EventsManager eventsManager ){
         this.eventDAO = eventDAO;
@@ -23,6 +24,7 @@ public class ProgramChecker implements Runnable{
         this.eventsManager = eventsManager;
         this.restrictedPrograms = new ArrayList<>();
         this.ignoredPrograms = new ArrayList<>();
+        this.reminders = eventsManager.getRemindersNow();
         DefaultRestricedProccess();
         DefaultIgnoredProccess();
     }
@@ -35,6 +37,13 @@ public class ProgramChecker implements Runnable{
         eventDAO = new EventDAO();
         eventsManager = new EventsManager(eventDAO);
         updateAppTracker();
+        if (reminderActive()) {
+            try {
+                DisplayReminder(reminderList());
+            } catch (AWTException e) {
+                throw new RuntimeException(e);
+            }
+        }
         if (restrictionActive()){
             List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
             List<String> list = new ArrayList<String>();
@@ -55,7 +64,19 @@ public class ProgramChecker implements Runnable{
         for (String app: restrictedRunning){
             if (SystemTray.isSupported()) {
                 TrayIconNotification td = new TrayIconNotification();
-                td.displayTray(app);
+                td.displayTray(app,"Restricted Apps Found!","has been closed");
+            } else {
+                System.err.println("System tray not supported!");
+            }
+        }
+
+    }
+    void DisplayReminder(List<Event> reminders) throws AWTException {
+        for (Event event: reminders){
+            if (SystemTray.isSupported()) {
+                TrayIconNotification td = new TrayIconNotification();
+                String bob = event.getTitle();
+                td.displayTray(event.getTitle(),"New Reminder!","");
             } else {
                 System.err.println("System tray not supported!");
             }
@@ -90,6 +111,16 @@ public class ProgramChecker implements Runnable{
         // Implement process checking logic here
         return null; // Placeholder return value
     }
+    private List<Event> reminderList(){
+        return eventsManager.getRemindersNow();
+    }
+
+    private boolean reminderActive(){
+        System.out.println(reminderList());
+        System.out.println("bob");
+        return reminderList() != null;
+    }
+
     public void DefaultRestricedProccess(){
         AddRestriction("NotePad");
         AddRestriction("Minecraft");
