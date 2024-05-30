@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -68,13 +69,22 @@
                     </children>
                 </Pane>
                 <Pane layoutX="120.0" layoutY="71.0" prefHeight="320.0" prefWidth="505.0" style="-fx-background-color: FFFFF0; -fx-background-radius: 15px;">
-                    <children>
-                        <Text layoutX="168.0" layoutY="141.0" stroke="BLACK" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Leaving Blank for now....">
-                            <font>
-                                <Font size="16.0" />
-                            </font>
-                        </Text>
-                    </children>
+               <children>
+                  <Text layoutX="27.0" layoutY="33.0" stroke="BLACK" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Understanding ADHD">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="11.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Attention Deficit Hyperactivity Disorder (ADHD) is a neurodevelopmental disorder affecting both children and adults, characterized by symptoms of inattention, hyperactivity, and impulsivity. Common signs include difficulty sustaining attention, trouble organizing tasks, excessive fidgeting, talking excessively, and interrupting others. While the exact cause is unknown, genetics play a significant role, and other risk factors include brain injury, exposure to environmental toxins during pregnancy, premature birth, and low birth weight. Diagnosis involves a comprehensive evaluation by a healthcare professional, and treatment often includes medication and behavioral therapy. Effective management strategies include using planners, establishing routines, and creating quiet workspaces. For parents and educators, clear expectations, positive reinforcement, and breaking tasks into simple steps can be beneficial. For more information and support," wrappingWidth="482.5">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </Text>
+                  <Hyperlink layoutX="11.0" layoutY="197.0" text="www.add.org" />
+                  <Hyperlink layoutX="11.0" layoutY="220.0" text="www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" />
+                  <Hyperlink layoutX="9.0" layoutY="243.0" text="www.cdc.gov/ncbddd/adhd/" />
+                  <Hyperlink layoutX="11.0" layoutY="266.0" text="www.mayoclinic.org/diseases-conditions/adhd/symptoms-causes/syc-20350889" />
+               </children>
                 </Pane>
             </children>
         </AnchorPane>

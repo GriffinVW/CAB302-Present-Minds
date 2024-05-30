@@ -64,7 +64,7 @@ public class HelloApplication extends Application {
         cal.set(2024, Calendar.MAY,10,10,30,0);
         cal2.set(2024, Calendar.MAY,10,16,30,0);
         Event event = new Event("Play Time", "Working today",cal,cal2,true,true);
-        eventDAO.delete(1);
+//        eventDAO.delete(1);
         eventDAO.insert(event,2);
         List<Event> events1 = eventDAO.getAllUser(1);
 //        new ProgramChecker(eventDAO, eventsManager);

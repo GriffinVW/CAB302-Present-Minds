@@ -69,6 +69,8 @@ public class remindersController implements Controller {
 
     int id = 0;
 
+    Event selected;
+
     // You need to assign a function to each of the buttons here
     @Override
     public void initialize() {
@@ -82,7 +84,8 @@ public class remindersController implements Controller {
         information.setOnAction(event -> handleNavButtonClick("ADHD_Information", information));
         report.setOnAction(event -> handleNavButtonClick("Screen_Time", report));
         logout.setOnAction(event -> handleNavButtonClick("login", logout));
-        newele.setOnAction(event -> handleButtonClick("newele"));
+
+        newele.setOnAction(event -> handleNavButtonClick("Reminders", reminders));
         confirm.setOnAction(event -> handleButtonClick("confirm"));
         delete.setOnAction(event -> handleButtonClick("delete"));
 
@@ -92,6 +95,8 @@ public class remindersController implements Controller {
             if (newSelection != null) {
                 System.out.println(getId(newSelection) + " Id");
                 id = getId(newSelection);
+
+                selected = newSelection;
                 System.out.println(getTitle(newSelection) + " title");
                 System.out.println(getDescription(newSelection) + " description");
                 System.out.println(getStartTime(newSelection).getInstance());
@@ -143,7 +148,6 @@ public class remindersController implements Controller {
     public void handleButtonClick(String buttonId) {
         System.out.println("Button clicked: " + buttonId);
         EventDAO eventDAO = new EventDAO();
-
         if (Objects.equals(buttonId, "newele")) {
             getReminders();
         } else if (Objects.equals(buttonId, "confirm")) {
@@ -166,21 +170,57 @@ public class remindersController implements Controller {
                 int hourInt = Integer.parseInt(readTextField(hour));
 
                 if (yearInt > 2100) {
-                    System.out.println("This date is to far away");
-                    updateErrorText(errorLabel, "This date is to far away");
+                    System.out.println("This date is too far away");
+                    updateErrorText(errorLabel, "This date is too far away");
                     return;
                 } else if (yearInt < Year.now().getValue()) {
                     System.out.println("This date is in the past");
                     updateErrorText(errorLabel, "This date is in the past, please choose a future date");
                     return;
-                } else if (monthInt > 12 || hourInt > 24 || secondInt > 60) {
+                } else if (monthInt < 1 || monthInt > 12 || hourInt > 23 || secondInt > 59 || minInt > 59) {
                     System.out.println("Impossible date");
                     updateErrorText(errorLabel, "Impossible date");
                     return;
                 }
 
+                int calendarMonth;
+                switch (monthInt) {
+                    case 1: calendarMonth = Calendar.JANUARY; break;
+                    case 2: calendarMonth = Calendar.FEBRUARY; break;
+                    case 3: calendarMonth = Calendar.MARCH; break;
+                    case 4: calendarMonth = Calendar.APRIL; break;
+                    case 5: calendarMonth = Calendar.MAY; break;
+                    case 6: calendarMonth = Calendar.JUNE; break;
+                    case 7: calendarMonth = Calendar.JULY; break;
+                    case 8: calendarMonth = Calendar.AUGUST; break;
+                    case 9: calendarMonth = Calendar.SEPTEMBER; break;
+                    case 10: calendarMonth = Calendar.OCTOBER; break;
+                    case 11: calendarMonth = Calendar.NOVEMBER; break;
+                    case 12: calendarMonth = Calendar.DECEMBER; break;
+                    default:
+                        System.out.println("Invalid month");
+                        updateErrorText(errorLabel, "Invalid month");
+                        return;
+                }
+
+                Calendar cal1 = Calendar.getInstance();
+                Calendar cal2 = Calendar.getInstance();
+                cal1.set(2024, Calendar.JANUARY, 1, 0, 0, 0);
+                cal2.set(2200, Calendar.DECEMBER, 24, 0, 0, 0);
+
+                List<Event> events = eventDAO.getAllUserPeriodReminders(SessionManager.getInstance().getUserId(), cal1, cal2);
+                for (Event event : events) {
+                    System.out.println(event.getDescription());
+
+                    if (Objects.equals(event.getTitle(), titleText)) {
+                        System.out.println("Needs unique name");
+                        updateErrorText(errorLabel, "Needs unique name");
+                        return;
+                    }
+                }
+
                 Calendar cal = Calendar.getInstance();
-                cal.set(yearInt, monthInt, dayInt, hourInt, minInt, secondInt);
+                cal.set(yearInt, calendarMonth, dayInt, hourInt, minInt, secondInt);
                 Event event = new Event(titleText, descritptionText, cal, cal, false, true);
                 eventDAO.insert(event, SessionManager.getInstance().getUserId());
 
@@ -190,10 +230,13 @@ public class remindersController implements Controller {
                 System.out.println("Invalid integer");
                 updateErrorText(errorLabel, "Invalid integer");
             }
+
         } else if (Objects.equals(buttonId, "delete")) {
-            if (id != 0) {
-                System.out.println(id + "removed");
-                eventDAO.delete(id);
+            if (selected != null) {
+                System.out.println(selected.getTitle() + " removed");
+                System.out.println(selected.getEventId() + " removed");
+                eventDAO.delete(selected.getTitle());
+                getReminders();
             } else {
                 System.out.println("Please Select Event");
                 updateErrorText(errorLabel, "Please Select Event");
