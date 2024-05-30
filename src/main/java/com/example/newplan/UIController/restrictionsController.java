@@ -121,13 +121,13 @@ public class restrictionsController implements Controller {
 
                 appName.setText(getTitle(newSelection));
 
-                fMm.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH)));
+                fMm.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH) + 1));
                 fHh.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_MONTH)));
                 fMin.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MINUTE)));
                 fDd.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_MONTH)));
                 fYy.setText(String.valueOf(newSelection.getStartTime().get(Calendar.YEAR)));
 
-                toMm.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MONTH)));
+                toMm.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MONTH) + 1));
                 toHh.setText(String.valueOf(newSelection.getEndTime().get(Calendar.HOUR_OF_DAY)));
                 toMmin.setText(String.valueOf(newSelection.getEndTime().get(Calendar.MINUTE)));
                 toDd.setText(String.valueOf(newSelection.getEndTime().get(Calendar.DAY_OF_MONTH)));

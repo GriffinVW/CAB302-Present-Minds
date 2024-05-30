@@ -105,7 +105,7 @@ public class remindersController implements Controller {
                 description.setText(getDescription(newSelection));
 
                 day.setText(String.valueOf(newSelection.getStartTime().get(Calendar.DAY_OF_MONTH)));
-                month.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH)));
+                month.setText(String.valueOf(newSelection.getStartTime().get(Calendar.MONTH) + 1));
                 year.setText(String.valueOf(newSelection.getStartTime().get(Calendar.YEAR)));
 
 
