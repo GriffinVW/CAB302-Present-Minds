@@ -3,7 +3,7 @@ package com.example.newplan.model;
 import java.awt.*;
 
 public class TrayIconNotification {
-    public void displayTray(String app) throws AWTException {
+    public void displayTray(String app, String message,String message2) throws AWTException {
         //Obtain only one instance of the SystemTray object
         SystemTray tray = SystemTray.getSystemTray();
 
@@ -19,8 +19,8 @@ public class TrayIconNotification {
         //Set tooltip text for the tray icon
         trayIcon.setToolTip("System tray icon demo");
         tray.add(trayIcon);
-        String string = String.format("%s has been closed", app);
+        String string = String.format("%1$s"+" "+"%2$s", app,message2);
 
-        trayIcon.displayMessage("Restricted Apps Found!", string, TrayIcon.MessageType.INFO);
+        trayIcon.displayMessage(message, string, TrayIcon.MessageType.INFO);
     }
 }
