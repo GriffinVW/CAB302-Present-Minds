@@ -65,13 +65,11 @@ public class HelloController {
 
     @FXML
     protected void onHelloButtonClick() {
-        //ArrayList<TblEvent> events = eventDAO.getEventsForUser(1);
         Calendar cal = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
         cal.set(2024, Calendar.MAY,10,10,30,0);
         cal2.set(2024, Calendar.MAY,10,16,30,0);
         Event event = new Event("Play Time", "Working today",cal,cal2,true,true);
-//        eventDAO.delete(1);
         eventDAO.insert(event,1);
         List<Event> events1 = eventDAO.getAllUser(1);
         welcomeText.setText(events1.get(0).getTitle());

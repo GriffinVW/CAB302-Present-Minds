@@ -17,44 +17,50 @@ import java.util.concurrent.TimeUnit;
 
 
 public class HelloApplication extends Application {
-    private EventDAO eventDAO;
-    private EventsManager eventsManager;
+
     @Override
     public void start(Stage stage) throws IOException {
         SessionManager sessionManager = SessionManager.getInstance();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 640, 400);
-//        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-
-
         stage.setTitle("Present-Minds!");
         stage.setScene(scene);
         stage.show();
     }
-    // Toms comment
-    // Ethan did not commit here
-    // Griffins second commit for webhook testing
 
     public static void main(String[] args) {
         // added this line quickly to see where the .db file was stored
         System.out.println("Working directory = " + System.getProperty("user.dir"));
+
+        // Creates user connection and table
         UserDAO userDAO = new UserDAO();
         userDAO.createTable();
 
-        Test();
+        //Test();
+
+        //Creates event table connection and event manager
         EventDAO eventDAO = new EventDAO();
         EventsManager eventsManager = new EventsManager(eventDAO);
+
+        //Creates app tracker connection and table
         AppTrackerDAO appTrackerDAO = new AppTrackerDAO();
         appTrackerDAO.createTable();
+
+        //Initiates loop of 5 minutes
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,5, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,5, TimeUnit.SECONDS);
+
+        //Launches Application
         launch();
+
+        //Closes data connections and loop upon app close
         userDAO.close();
-//        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-//        scheduler.scheduleAtFixedRate(new ProgramChecker(), 0, 5, TimeUnit.MINUTES);
-
-
+        appTrackerDAO.close();
+        eventDAO.close();
+        scheduler.shutdown();
     }
+
+    //Test class for Events
     static void Test(){
         EventDAO eventDAO = new EventDAO();
         EventsManager eventsManager = new EventsManager(eventDAO);
@@ -64,10 +70,7 @@ public class HelloApplication extends Application {
         cal.set(2024, Calendar.MAY,10,10,30,0);
         cal2.set(2024, Calendar.MAY,10,16,30,0);
         Event event = new Event("Play Time", "Working today",cal,cal2,true,true);
-//        eventDAO.delete(1);
         eventDAO.insert(event,2);
         List<Event> events1 = eventDAO.getAllUser(1);
-//        new ProgramChecker(eventDAO, eventsManager);
-
     }
 }
