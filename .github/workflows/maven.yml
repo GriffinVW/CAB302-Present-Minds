@@ -34,4 +34,7 @@ jobs:
     - name: Publish Javadoc
       uses: JamesIves/github-pages-deploy-action@v4
       with:
+        token: ${{ secrets.ACCESS_TOKEN }}
+        branch: gh-pages
         folder: target/docs/javadoc
+        clean: true`
