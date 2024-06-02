@@ -48,7 +48,7 @@ public class HelloApplication extends Application {
 
         //Initiates loop of 5 minutes
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,5, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new ProgramChecker(eventDAO, appTrackerDAO, eventsManager), 0 ,5, TimeUnit.MINUTES);
 
         //Launches Application
         launch();
