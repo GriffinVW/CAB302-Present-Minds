@@ -249,7 +249,7 @@ public class restrictionsController implements Controller {
 
             List<Event> events = eventDAO.getAllUserPeriodRestrictons(SessionManager.getInstance().getUserId(), cal1, cal2);
             for (Event event : events) {
-                System.out.println(event.getTitle());
+//                System.out.println(event.getTitle());
 
                 if (Objects.equals(event.getTitle(), titleText)) {
                     System.out.println("Needs unique name");

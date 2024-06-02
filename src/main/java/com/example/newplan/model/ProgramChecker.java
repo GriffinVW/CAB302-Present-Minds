@@ -30,46 +30,42 @@ public class ProgramChecker implements Runnable{
         return restrictedPrograms;
     }
 
+    //Method that runs every 5 minutes
     @Override
     public void run() {
+        if (sessionManager.getUserId() != null) {
+            eventDAO = new EventDAO();
+            eventsManager = new EventsManager(eventDAO);
+            updateAppTracker();
+            updateRestrictedPrograms();
 
-
-        eventDAO = new EventDAO();
-        eventsManager = new EventsManager(eventDAO);
-        updateAppTracker();
-        updateRestrictedPrograms();
-
-        if (reminderActive()) {
-            try {
-                DisplayReminder(reminderList());
-            } catch (AWTException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if (restrictionActive()){
-
-            List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
-            List<String> list = new ArrayList<String>();
-            list.add("");
-            if (!restrictedRunning.equals(list)){
+            if (reminderActive()) {
                 try {
-                    DisplayWarning(restrictedRunning);
+                    DisplayReminder(reminderList());
                 } catch (AWTException e) {
                     throw new RuntimeException(e);
                 }
-                //ClosePrograms(restrictedRunning);
+            }
+            if (restrictionActive()) {
+                List<String> restrictedRunning = getRunningRestrictedProcesses(restrictedPrograms);
+                List<String> list = new ArrayList<String>();
+                list.add("");
+                if (!restrictedRunning.equals(list)) {
+                    try {
+                        DisplayWarning(restrictedRunning);
+                    } catch (AWTException e) {
+                        throw new RuntimeException(e);
+                    }
+                    ClosePrograms(restrictedRunning);
+                }
             }
         }
-
     }
 
     void updateRestrictedPrograms() {
         Integer id = SessionManager.getInstance().getUserId();
-
-        System.out.println(id);
-
         this.restrictedPrograms = new ArrayList<>();
-        DefaultRestricedProccess();
+        //DefaultRestricedProccess();
 
         if (id != null) {
             Calendar cal1 = Calendar.getInstance();
@@ -79,7 +75,6 @@ public class ProgramChecker implements Runnable{
 
             List<Event> events = eventDAO.getAllUserPeriodRestrictons(id, cal1, cal2);
             for (Event event : events) {
-                System.out.println(event.getTitle() + "test");
                 AddRestriction(event.getTitle());
             }
         }
@@ -131,17 +126,12 @@ public class ProgramChecker implements Runnable{
     private boolean restrictionActive(){
         return restrictionList() != null;
     }
-    private List<Event> isProcessRunning(String processName) {
-        // Implement process checking logic here
-        return null; // Placeholder return value
-    }
+
     private List<Event> reminderList(){
         return eventsManager.getRemindersNow();
     }
 
     private boolean reminderActive(){
-        System.out.println(reminderList());
-        System.out.println("bob");
         return reminderList() != null;
     }
 

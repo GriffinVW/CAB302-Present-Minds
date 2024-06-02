@@ -93,13 +93,13 @@ public class remindersController implements Controller {
 
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                System.out.println(getId(newSelection) + " Id");
+                //System.out.println(getId(newSelection) + " Id");
                 id = getId(newSelection);
 
                 selected = newSelection;
-                System.out.println(getTitle(newSelection) + " title");
-                System.out.println(getDescription(newSelection) + " description");
-                System.out.println(getStartTime(newSelection).getInstance());
+                //System.out.println(getTitle(newSelection) + " title");
+                //System.out.println(getDescription(newSelection) + " description");
+                //System.out.println(getStartTime(newSelection).getInstance());
 
                 title.setText(getTitle(newSelection));
                 description.setText(getDescription(newSelection));
@@ -129,9 +129,9 @@ public class remindersController implements Controller {
         cal2.set(2200, Calendar.DECEMBER, 24, 0, 0, 0);
 
         List<Event> events = eventDAO.getAllUserPeriodReminders(SessionManager.getInstance().getUserId(), cal1, cal2);
-        for (Event event : events) {
-            System.out.println(event.getDescription());
-        }
+//        for (Event event : events) {
+//            System.out.println(event.getDescription());
+//        }
 
         ObservableList<Event> data = FXCollections.observableArrayList(events);
 
@@ -210,7 +210,7 @@ public class remindersController implements Controller {
 
                 List<Event> events = eventDAO.getAllUserPeriodReminders(SessionManager.getInstance().getUserId(), cal1, cal2);
                 for (Event event : events) {
-                    System.out.println(event.getDescription());
+//                    System.out.println(event.getDescription());
 
                     if (Objects.equals(event.getTitle(), titleText)) {
                         System.out.println("Needs unique name");
